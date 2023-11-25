@@ -69,7 +69,7 @@ class HotpotChopstickItem :
 
     override fun getUseAction(itemStack: ItemStack): UseAction {
         var chopstickFoodItemStack: ItemStack
-        if (!getChopstickFoodItemStack(itemStack).also { chopstickFoodItemStack = it }.isEmpty()) {
+        if (!getChopstickFoodItemStack(itemStack).also { chopstickFoodItemStack = it }.isEmpty) {
             if (chopstickFoodItemStack.isFood) {
                 return chopstickFoodItemStack.useAction
             }

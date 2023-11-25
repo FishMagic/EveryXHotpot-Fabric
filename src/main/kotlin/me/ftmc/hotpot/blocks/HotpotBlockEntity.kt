@@ -136,17 +136,17 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
             soup.takeOutContentViaHand(
                 content, soup.takeOutContentViaChopstick(content, content.takeOut(this, pos), this, pos), this, pos
             )
-            contents.set(contentSection, HotpotContents.emptyContent())
+            contents[contentSection] = HotpotContents.emptyContent()
             markDataChanged()
         }
     }
 
     override fun tryTakeOutContentViaChopstick(hitSection: Int, pos: BlockPosWithLevel): ItemStack {
         val contentSection = getContentSection(hitSection)
-        val content: IHotpotContent = contents.get(contentSection)
+        val content: IHotpotContent = contents[contentSection]
         if (content !is HotpotEmptyContent) {
             val itemStack: ItemStack = soup.takeOutContentViaChopstick(content, content.takeOut(this, pos), this, pos)
-            contents.set(contentSection, HotpotContents.emptyContent())
+            contents[contentSection] = HotpotContents.emptyContent()
             markDataChanged()
             return itemStack
         }
@@ -163,9 +163,9 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
 
     fun onRemove(pos: BlockPosWithLevel) {
         for (i in 0 until contents.size) {
-            val content: IHotpotContent = contents.get(i)
+            val content: IHotpotContent = contents[i]
             soup.takeOutContentViaHand(content, content.takeOut(this, pos), this, pos)
-            contents.set(i, HotpotContents.emptyContent())
+            contents[i] = HotpotContents.emptyContent()
         }
         markDataChanged()
     }
@@ -313,7 +313,7 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
         }
 
         fun getPosSection(blockPos: BlockPos, pos: Vec3d): Int {
-            val vec = pos.subtract(blockPos.getX().toDouble(), blockPos.getY().toDouble(), blockPos.getZ().toDouble())
+            val vec = pos.subtract(blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble())
             val x: Double = vec.x - 0.5f
             val z: Double = vec.z - 0.5f
             val sectionSize = (360f / 8f).toDouble()

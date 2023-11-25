@@ -2,7 +2,6 @@ package me.ftmc.hotpot.spices
 
 import net.minecraft.inventory.RecipeInputInventory
 import net.minecraft.item.ItemStack
-import java.util.function.Supplier
 
 
 class HotpotSpiceAssembler(private val craftingContainer: RecipeInputInventory) {
@@ -27,7 +26,7 @@ class HotpotSpiceAssembler(private val craftingContainer: RecipeInputInventory) 
     fun withExisting(predicate: (ItemStack) -> Boolean, supplier: () -> ItemStack): HotpotSpiceAssembler {
         for (i in 0 until craftingContainer.size()) {
             val itemStack: ItemStack = craftingContainer.getStack(i)
-            if (!itemStack.isEmpty() && predicate(itemStack)) {
+            if (!itemStack.isEmpty && predicate(itemStack)) {
                 assembled = itemStack.copyWithCount(1)
                 return filter { !predicate(it) }
             }
@@ -35,8 +34,8 @@ class HotpotSpiceAssembler(private val craftingContainer: RecipeInputInventory) 
         return with(supplier)
     }
 
-    fun with(supplier: Supplier<ItemStack>): HotpotSpiceAssembler {
-        assembled = supplier.get()
+    fun with(supplier: () -> ItemStack): HotpotSpiceAssembler {
+        assembled = supplier()
         return this
     }
 

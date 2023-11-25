@@ -63,7 +63,7 @@ class HotpotLongPlate : IHotpotPlaceable {
         hotpotPlateBlockEntity: HotpotPlaceableBlockEntity,
         selfPos: BlockPosWithLevel
     ) {
-        if (itemStack.isEmpty()) {
+        if (itemStack.isEmpty) {
             if (player.isInSneakingPose) {
                 hotpotPlateBlockEntity.tryRemove(this, selfPos)
             } else {

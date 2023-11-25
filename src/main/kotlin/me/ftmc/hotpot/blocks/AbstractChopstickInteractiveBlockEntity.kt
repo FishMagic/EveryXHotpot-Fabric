@@ -26,7 +26,7 @@ abstract class AbstractChopstickInteractiveBlockEntity(
     ) {
         if (itemStack.isOf(EveryXHotpot.HOTPOT_CHOPSTICK)) {
             var chopstickFoodItemStack: ItemStack = HotpotChopstickItem.getChopstickFoodItemStack(itemStack)
-            chopstickFoodItemStack = if (chopstickFoodItemStack.isEmpty()) tryTakeOutContentViaChopstick(
+            chopstickFoodItemStack = if (chopstickFoodItemStack.isEmpty) tryTakeOutContentViaChopstick(
                 hitSection,
                 selfPos
             ) else tryPlaceContentViaChopstick(hitSection, player, hand, chopstickFoodItemStack, selfPos)

@@ -146,7 +146,7 @@ class HotpotPlacedChopstick : IHotpotPlaceable {
     }
 
     fun isValidPos(pos1: Int, pos2: Int): Boolean {
-        return 0 <= pos1 && pos1 <= 3 && 0 <= pos2 && pos2 <= 3 && pos1 + pos2 != 3
+        return pos1 in 0..3 && pos2 in 0..3 && pos1 + pos2 != 3
     }
 
     override fun getPos(): List<Int> {

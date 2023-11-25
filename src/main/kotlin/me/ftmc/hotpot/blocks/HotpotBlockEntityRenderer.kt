@@ -16,7 +16,6 @@ import kotlin.math.max
 class HotpotBlockEntityRenderer(private val context: BlockEntityRendererFactory.Context) :
     BlockEntityRenderer<HotpotBlockEntity> {
 
-    @Suppress("deprecation")
     override fun render(
         entity: HotpotBlockEntity,
         partialTick: Float,

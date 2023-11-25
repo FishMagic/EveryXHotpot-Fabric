@@ -33,7 +33,7 @@ class SimpleItemSlot {
     }
 
     val renderCount: Int
-        get() = if (itemSlot.isEmpty) 0 else max(1, itemSlot.getCount() / 16)
+        get() = if (itemSlot.isEmpty) 0 else max(1, itemSlot.count / 16)
 
     fun addItem(itemStack: ItemStack): Boolean {
         if (itemSlot.isEmpty) {

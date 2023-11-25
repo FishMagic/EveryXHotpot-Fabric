@@ -108,7 +108,7 @@ abstract class AbstractHotpotItemStackContent : IHotpotContent {
         hotpotBlockEntity: HotpotBlockEntity,
         pos: BlockPosWithLevel
     ) {
-        val iHotpotSpecialContentItem = itemStack.getItem()
+        val iHotpotSpecialContentItem = itemStack.item
         if (iHotpotSpecialContentItem is IHotpotSpecialContentItem && content is AbstractHotpotItemStackContent) {
             content.itemStack = iHotpotSpecialContentItem.onOtherContentUpdate(
                 itemStack,

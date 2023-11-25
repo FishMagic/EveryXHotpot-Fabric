@@ -15,7 +15,7 @@ class HotpotSpiceMatcher(val items: MutableList<ItemStack>) {
     }
 
     fun discard(list: List<ItemStack>): HotpotSpiceMatcher {
-        items.removeAll(list)
+        items.removeAll(list.toSet())
         return this
     }
 

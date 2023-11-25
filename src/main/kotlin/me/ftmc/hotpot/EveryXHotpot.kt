@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory
 object EveryXHotpot : ModInitializer {
     private val logger = LoggerFactory.getLogger("everyxhotpot")
 
-    val MOD_ID = "everyxhotpot"
+    const val MOD_ID = "everyxhotpot"
 
     val TAG_LOCATION = Identifier(MOD_ID, "hotpot_tags")
 
@@ -131,7 +131,7 @@ object EveryXHotpot : ModInitializer {
 
     //====================RECIPE BELOW==========================
 
-    val HOTPOT_SPICE_PACK_SPECIAL_RECIPE = Registry.register(
+    val HOTPOT_SPICE_PACK_SPECIAL_RECIPE: SpecialRecipeSerializer<HotpotSpicePackRecipe> = Registry.register(
         Registries.RECIPE_SERIALIZER,
         Identifier(MOD_ID, "crafting_special_hotpot_spice_pack"),
         SpecialRecipeSerializer(::HotpotSpicePackRecipe)

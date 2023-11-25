@@ -97,9 +97,9 @@ class HotpotPlaceableBlockEntity(pos: BlockPos, state: BlockState) :
 
     fun tryPlace(placeable: IHotpotPlaceable): Boolean {
         if (canPlaceableFit(placeable)) {
-            val toReplace: IHotpotPlaceable = placeables.get(placeable.anchorPos)
+            val toReplace: IHotpotPlaceable = placeables[placeable.anchorPos]
             if (toReplace is HotpotEmptyPlaceable) {
-                placeables.set(placeable.anchorPos, placeable)
+                placeables[placeable.anchorPos] = placeable
                 markDataChanged()
                 return true
             }
@@ -196,9 +196,9 @@ class HotpotPlaceableBlockEntity(pos: BlockPos, state: BlockState) :
         fun getHitPos(pos: BlockPos, location: Vec3d): Int {
             val blockPos: BlockPos = pos.offset(Direction.UP)
             val vec = location.subtract(
-                blockPos.getX().toDouble(),
-                blockPos.getY().toDouble(),
-                blockPos.getZ().toDouble()
+                blockPos.x.toDouble(),
+                blockPos.y.toDouble(),
+                blockPos.z.toDouble()
             )
             return (if (vec.z < 0.5) 0 else 1) or if (vec.x < 0.5) 0 else 2
         }
