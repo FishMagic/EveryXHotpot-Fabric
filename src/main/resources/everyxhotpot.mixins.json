@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "package": "me.ftmc.hotpot.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BlockModelRendererMixin",
+    "FinishUsingItemEventMixin",
+    "GetTooltipEventMixin",
+    "LivingEntityMixin",
+    "OnDeathEventMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "BreakingItemParticleMixin",
+    "ItemRenderMixin",
+    "ModelBakeryMixin",
+    "SpriteContentAccessorMixin",
+    "SpriteContentsMixin",
+    "SpriteLoaderMixin"
+  ]
+}

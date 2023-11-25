@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "everyxhotpot",
+  "version": "${version}",
+  "name": "EveryXHotpot",
+  "description": "谈起热闹, AR最先想到的就是火锅, 咕噜咕噜的冒泡泡, 热气腾腾的, 和朋友们一起大快朵颐, 好不热闹.\n所以AR决定做一个大家一起都能吃火锅的Mod, 在Minecraft的世界里, 把大家聚在一起, 一起热闹地说笑, 一起吃暖暖的火锅.\n无论大家的朋友在哪, 哪怕没办法见面, 都能在Minecraft里, 升起炉灶, 围在一桌\n与§l所有§r朋友, 在§l所有§r时间, 享受§l所有§r§m(甚至可以是荒诞的)§r美食, 一起开开心心地吃上火锅!\n\nI think \"热闹\" in Chinese is not so easy to explain in English.\nTranslaters told me that it could be \"lively\", \"busy\", \"bustling\", \"boisterous\" and more.\nBut I had my own thoughts jumping into my mind at the moment I saw the topic,\nwhich respresents friends sitting together around a bubbling hotpot, enjoying and talking.\nEven if you cannot get in touch with your friends in reality, we can connect each other together\nin Minecraft, enjoying the hotpot with this Minecraft Mod,\n§lEVERAYone, EVERYthing, EVERYtime.",
+  "authors": [
+    "Argon4W",
+    "Laevatein Scarlet"
+  ],
+  "contact": {
+    "sources": "https://github.com/FishMagic/EveryXHotpot-Fabric"
+  },
+  "license": "MIT License",
+  "icon": "assets/everyxhotpot/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "me.ftmc.hotpot.EveryXHotpot",
+        "adapter": "kotlin"
+      }
+    ],
+    "client": [
+      {
+        "value": "me.ftmc.hotpot.EveryXHotpotClient",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "everyxhotpot.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.24",
+    "minecraft": "1.20.1",
+    "java": ">=17",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.9.20"
+  },
+  "suggests": {
+    "another-mod": "*"
+  },
+  "accessWidener": "everyxhotpot.accesswidener"
+}

@@ -1,0 +1,5 @@
+accessWidener v2 named
+accessible method net/minecraft/client/render/model/json/ModelOverrideList <init> ()V
+accessible class net/minecraft/client/texture/SpriteContents$Animation
+accessible field net/minecraft/client/texture/SpriteContents animation Lnet/minecraft/client/texture/SpriteContents$Animation;
+mutable field net/minecraft/client/texture/SpriteContents animation Lnet/minecraft/client/texture/SpriteContents$Animation;
