@@ -3,3 +3,6 @@ accessible method net/minecraft/client/render/model/json/ModelOverrideList <init
 accessible class net/minecraft/client/texture/SpriteContents$Animation
 accessible field net/minecraft/client/texture/SpriteContents animation Lnet/minecraft/client/texture/SpriteContents$Animation;
 mutable field net/minecraft/client/texture/SpriteContents animation Lnet/minecraft/client/texture/SpriteContents$Animation;
+accessible field net/minecraft/client/render/block/BlockModelRenderer DIRECTIONS [Lnet/minecraft/util/math/Direction;
+accessible method net/minecraft/client/render/block/BlockModelRenderer renderQuads (Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;FFFLjava/util/List;II)V
+accessible field net/minecraft/client/texture/SpriteContents image Lnet/minecraft/client/texture/NativeImage;

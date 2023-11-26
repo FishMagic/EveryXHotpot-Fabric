@@ -3,7 +3,6 @@
   "package": "me.ftmc.hotpot.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlockModelRendererMixin",
     "FinishUsingItemEventMixin",
     "GetTooltipEventMixin",
     "LivingEntityMixin",
@@ -16,7 +15,6 @@
     "BreakingItemParticleMixin",
     "ItemRenderMixin",
     "ModelBakeryMixin",
-    "SpriteContentAccessorMixin",
     "SpriteContentsMixin",
     "SpriteLoaderMixin"
   ]

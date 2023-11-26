@@ -29,7 +29,7 @@ public abstract class SpriteLoaderMixin {
             for (SpriteContents content : contents) {
                 if (!content.getId().getPath().contains("item/")) continue;
 
-                NativeImage originalImage = ((SpriteContentAccessorMixin) content).getImage();
+                NativeImage originalImage = content.image;
 
                 NativeImage image = new NativeImage(
                         originalImage.getFormat(),
