@@ -9,13 +9,15 @@
 - Fabric
     - 1.20.1
 
-#### 其他版本
-
 - [LexForge & NeoForge](https://github.com/Argon4W/EveryXHotpot)
 
-### 交流群号(QQ): 608309578
+### 交流群号(QQ):
 
-### 赞助支持: https://afdian.net/a/argon4w
+- 608309578
+
+### 赞助支持:
+
+- https://afdian.net/a/argon4w
 
 ***
 
