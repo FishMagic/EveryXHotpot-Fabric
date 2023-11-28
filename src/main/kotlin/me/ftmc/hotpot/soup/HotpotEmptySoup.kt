@@ -139,7 +139,7 @@ class HotpotEmptySoup : IHotpotSoup {
                         { it.isOf(Items.POTION) && PotionUtil.getPotion(it) === Potions.WATER },
                         HotpotEmptyFill(
                             HotpotSoups.getSoupOrElseEmpty("ClearSoup"), 0.333f, SoundEvents.ITEM_BOTTLE_FILL
-                        ) { ItemStack(Items.BUCKET) }
+                        ) { ItemStack(Items.GLASS_BOTTLE) }
                     ),
                     Pair(
                         { it.isOf(Items.MILK_BUCKET) },
