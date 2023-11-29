@@ -16,7 +16,10 @@ import net.minecraft.nbt.NbtElement
 import net.minecraft.potion.PotionUtil
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
+import kotlin.math.max
+import kotlin.math.round
 
 
 class HotpotSpicePackItem : Item(Settings()), IHotpotSpecialContentItem {
@@ -72,6 +75,19 @@ class HotpotSpicePackItem : Item(Settings()), IHotpotSpecialContentItem {
             )
             PotionUtil.buildTooltip(HotpotEffectHelper.mergeEffects(getSpiceEffects(itemStack)), tooltips, 1.0f)
         }
+    }
+
+    override fun isItemBarVisible(stack: ItemStack): Boolean {
+        return getSpiceAmount(stack) != 20
+    }
+
+    override fun getItemBarStep(stack: ItemStack): Int {
+        return round((getSpiceAmount(stack) * 13) / 20f).toInt()
+    }
+
+    override fun getItemBarColor(stack: ItemStack): Int {
+        val f = max(0f, getSpiceAmount(stack) / 20f)
+        return MathHelper.hsvToRgb(f / 3.0f, 1.0f, 1.0f)
     }
 
     fun setSpiceAmount(itemStack: ItemStack, amount: Int) {
