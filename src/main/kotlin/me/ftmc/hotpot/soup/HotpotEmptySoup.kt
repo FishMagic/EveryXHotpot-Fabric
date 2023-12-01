@@ -37,7 +37,7 @@ class HotpotEmptySoup : IHotpotSoup {
     }
 
     override val id: String
-        get() = "Empty"
+        get() = "empty_soup"
 
     override fun interact(
         hitSection: Int,
@@ -132,25 +132,25 @@ class HotpotEmptySoup : IHotpotSoup {
                     Pair(
                         { it.isOf(Items.WATER_BUCKET) },
                         HotpotEmptyFill(
-                            HotpotSoups.HOTPOT_SOUP_TYPES["ClearSoup"]!!, 1f, SoundEvents.ITEM_BUCKET_EMPTY
+                            { SoupRegistrar.CLEAR_SOUP.createSoup() }, 1f, SoundEvents.ITEM_BUCKET_EMPTY
                         ) { ItemStack(Items.BUCKET) }
                     ),
                     Pair(
                         { it.isOf(Items.POTION) && PotionUtil.getPotion(it) === Potions.WATER },
                         HotpotEmptyFill(
-                            HotpotSoups.getSoupOrElseEmpty("ClearSoup"), 0.333f, SoundEvents.ITEM_BOTTLE_FILL
+                            { SoupRegistrar.CLEAR_SOUP.createSoup() }, 0.333f, SoundEvents.ITEM_BOTTLE_FILL
                         ) { ItemStack(Items.GLASS_BOTTLE) }
                     ),
                     Pair(
                         { it.isOf(Items.MILK_BUCKET) },
                         HotpotEmptyFill(
-                            HotpotSoups.HOTPOT_SOUP_TYPES["CheeseSoup"]!!, 1f, SoundEvents.ITEM_BUCKET_EMPTY
+                            { SoupRegistrar.CHEESE_SOUP.createSoup() }, 1f, SoundEvents.ITEM_BUCKET_EMPTY
                         ) { ItemStack(Items.BUCKET) }
                     ),
                     Pair(
                         { it.isOf(Items.LAVA_BUCKET) },
                         HotpotEmptyFill(
-                            HotpotSoups.HOTPOT_SOUP_TYPES["LavaSoup"]!!, 1f, SoundEvents.ITEM_BUCKET_EMPTY_LAVA
+                            { SoupRegistrar.LAVA_SOUP.createSoup() }, 1f, SoundEvents.ITEM_BUCKET_EMPTY_LAVA
                         ) { ItemStack(Items.BUCKET) })
                 )
             )

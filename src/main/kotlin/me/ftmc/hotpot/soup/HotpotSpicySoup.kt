@@ -17,7 +17,7 @@ import net.minecraft.util.math.random.Random
 
 class HotpotSpicySoup : AbstractHotpotWaterBasedSoup() {
     override val id: String
-        get() = "SpicySoup"
+        get() = "spicy_soup"
 
     override fun animateTick(hotpotBlockEntity: HotpotBlockEntity, pos: BlockPosWithLevel, randomSource: Random) {}
     override fun addEffectToItem(itemStack: ItemStack, hotpotBlockEntity: HotpotBlockEntity, pos: BlockPosWithLevel) {

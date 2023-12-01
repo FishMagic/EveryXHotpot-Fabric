@@ -31,7 +31,7 @@ class HotpotCheeseSoup : AbstractEffectiveFluidBasedSoup(
     )
 ) {
     override val id: String
-        get() = "CheeseSoup"
+        get() = "cheese_soup"
 
     override fun animateTick(
         hotpotBlockEntity: HotpotBlockEntity,

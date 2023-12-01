@@ -1,6 +1,7 @@
 package me.ftmc.hotpot.soup
 
 import me.ftmc.hotpot.BlockPosWithLevel
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.contents.HotpotCampfireRecipeContent
 import me.ftmc.hotpot.contents.HotpotEmptyContent
@@ -11,7 +12,6 @@ import net.minecraft.item.Items
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
-import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
 
 
@@ -22,26 +22,16 @@ object HotpotSoups {
     val ACRID_ITEM_TAG: TagKey<Item>? = TagKey.of(RegistryKeys.ITEM, Identifier("sinofeast", "tastes/primary/acrid"))
     val MILK_ITEM_TAG: TagKey<Item>? = TagKey.of(RegistryKeys.ITEM, Identifier("forge", "milk/milk"))
     val MILK_BOTTLE_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM, Identifier("forge", "milk/milk_bottle"))
-    val HOTPOT_SOUP_TYPES: ConcurrentHashMap<String, () -> IHotpotSoup> =
-        ConcurrentHashMap(
-            mapOf(
-                "ClearSoup" to ::HotpotClearSoup,
-                "SpicySoup" to ::HotpotSpicySoup,
-                "CheeseSoup" to ::HotpotCheeseSoup,
-                "LavaSoup" to ::HotpotLavaSoup,
-                "Empty" to ::HotpotEmptySoup
-            )
-        )
     val HOTPOT_SOUP_MATCHES: List<(HotpotBlockEntity) -> SoupProcessor> = listOf(
         {
-            SoupProcessor(it, "SpicySoup")
+            SoupProcessor(it, "spicy_soup")
                 .enable(SINOFEAST_LOADED)
                 .withSoup(HotpotClearSoup::class)
                 .withItemTag(SoupProcessor.ItemTagPredicate(SPICY_ITEM_TAG, SoupProcessor.RequireMode(6)))
                 .withItemTag(SoupProcessor.ItemTagPredicate(ACRID_ITEM_TAG, SoupProcessor.RequireMode(2)))
         },
         {
-            SoupProcessor(it, "SpicySoup")
+            SoupProcessor(it, "spicy_soup")
                 .enable(!SINOFEAST_LOADED)
                 .withSoup(HotpotClearSoup::class)
                 .withItem(SoupProcessor.ItemPredicate(Items.REDSTONE, SoupProcessor.RequireMode(3)))
@@ -50,12 +40,8 @@ object HotpotSoups {
         }
     )
 
-    val emptySoup: () -> IHotpotSoup
-        get() = HOTPOT_SOUP_TYPES["Empty"]!!
-
-    fun getSoupOrElseEmpty(key: String): () -> IHotpotSoup {
-        return HOTPOT_SOUP_TYPES.getOrDefault(key, emptySoup)
-    }
+    val emptySoup: HotpotSoupType<HotpotEmptySoup>
+        get() = SoupRegistrar.EMPTY_SOUP
 
     fun ifMatchSoup(
         hotpotBlockEntity: HotpotBlockEntity,
@@ -162,9 +148,9 @@ object HotpotSoups {
         fun assemble(): IHotpotSoup {
             if (soupMatched && contentMatched) {
                 queuedReplaces.forEach { (_, v) -> hotpotBlockEntity.getContents().replaceAll { v(it) } }
-                return getSoupOrElseEmpty(key)()
+                return SoupRegistrar.SOUPS.get(Identifier(MOD_ID, key)).createSoup()
             }
-            return emptySoup()
+            return emptySoup.createSoup()
         }
     }
 }

@@ -22,7 +22,7 @@ class HotpotLavaSoup : AbstractHotpotFluidBasedSoup(
     )
 ) {
     override val id: String
-        get() = "LavaSoup"
+        get() = "lava_soup"
 
     override fun remapItemStack(copy: Boolean, itemStack: ItemStack, pos: BlockPosWithLevel): IHotpotContent? {
         return if (HotpotBlastFurnaceRecipeContent.hasBlastingRecipe(itemStack, pos))

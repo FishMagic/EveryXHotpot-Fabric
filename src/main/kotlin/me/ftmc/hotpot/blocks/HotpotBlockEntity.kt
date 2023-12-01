@@ -28,7 +28,7 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
     private var soupSynchronized = false
     private val contents: MutableList<IHotpotContent> =
         DefaultedList.ofSize(8, HotpotContents.emptyContent.createContent())
-    private var soup: IHotpotSoup = HotpotSoups.emptySoup()
+    private var soup: IHotpotSoup = HotpotSoups.emptySoup.createSoup()
     var renderedWaterLevel = -1f
     var waterLevel = 0f
         private set

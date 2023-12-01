@@ -2,6 +2,7 @@ package me.ftmc.hotpot.soup
 
 import me.ftmc.hotpot.BlockPosWithLevel
 import me.ftmc.hotpot.IHotpotSavable
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.contents.IHotpotContent
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
@@ -65,9 +66,27 @@ interface IHotpotSoup : IHotpotSavable<IHotpotSoup> {
     val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
 
     companion object {
+
+        val ID_FIXES = mapOf(
+            "ClearSoup" to "clear_soup",
+            "SpicySoup" to "spicy_soup",
+            "CheeseSoup" to "cheese_soup",
+            "LavaSoup" to "lava_soup",
+            "EmptySoup" to "empty_soup",
+            "Empty" to "empty_soup"
+        )
+
+        fun fixID(id: String): String {
+            return ID_FIXES[id] ?: id
+        }
+
         fun loadSoup(compoundTag: NbtCompound): IHotpotSoup {
-            return if (isTagValid(compoundTag)) HotpotSoups.getSoupOrElseEmpty(compoundTag.getString("Type"))()
-                .loadOrElseGet(compoundTag, HotpotSoups.emptySoup) else HotpotSoups.emptySoup()
+            return if (isTagValid(compoundTag)) SoupRegistrar.SOUPS.get(
+                Identifier(
+                    MOD_ID,
+                    fixID(compoundTag.getString("Type"))
+                )
+            ).createSoup() else HotpotSoups.emptySoup.createSoup()
         }
 
         fun isTagValid(compoundTag: NbtCompound): Boolean {

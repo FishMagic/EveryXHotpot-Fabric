@@ -10,6 +10,7 @@ import me.ftmc.hotpot.event.OnDeathEventCallback
 import me.ftmc.hotpot.items.HotpotChopstickItem
 import me.ftmc.hotpot.items.ItemRegistrar
 import me.ftmc.hotpot.placeables.PlaceableRegistrar
+import me.ftmc.hotpot.soup.SoupRegistrar
 import me.ftmc.hotpot.soup.effects.EffectRegistrar
 import me.ftmc.hotpot.soup.effects.HotpotEffectHelper
 import me.ftmc.hotpot.spices.HotpotSpicePackRecipe
@@ -84,6 +85,7 @@ object EveryXHotpot : ModInitializer {
         EffectRegistrar.register()
         ContentRegistrar.register()
         PlaceableRegistrar.register()
+        SoupRegistrar.register()
         FinishUsingItemCallback.EVENT.register(object : FinishUsingItemCallback {
             override fun finishUsing(stack: ItemStack, world: World, user: LivingEntity): ItemStack {
                 if (user !is ServerPlayerEntity || world.isClient) {

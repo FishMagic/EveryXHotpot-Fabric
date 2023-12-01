@@ -43,7 +43,7 @@ abstract class AbstractHotpotSoup : IHotpotSoup {
     ): IHotpotContent? {
         if (itemStack.isEmpty) {
             if (player.isCollidable && hotpotBlockEntity.canBeRemoved()) {
-                hotpotBlockEntity.setSoup(HotpotSoups.emptySoup(), selfPos)
+                hotpotBlockEntity.setSoup(HotpotSoups.emptySoup.createSoup(), selfPos)
                 hotpotBlockEntity.onRemove(selfPos)
             } else {
                 player.damage(player.damageSources.onFire(), 5F)
