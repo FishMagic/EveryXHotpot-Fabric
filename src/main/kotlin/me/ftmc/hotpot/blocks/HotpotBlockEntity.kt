@@ -1,7 +1,6 @@
 package me.ftmc.hotpot.blocks
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.contents.HotpotContents
 import me.ftmc.hotpot.contents.HotpotEmptyContent
 import me.ftmc.hotpot.contents.IHotpotContent
@@ -21,14 +20,14 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import org.joml.Math
-import java.util.function.UnaryOperator
 
 
 class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
     AbstractChopstickInteractiveBlockEntity(BlockEntityRegistrar.HOTPOT_BLOCK_ENTITY, pos, state) {
     private var contentChanged = true
     private var soupSynchronized = false
-    private val contents: MutableList<IHotpotContent> = DefaultedList.ofSize(8, HotpotContents.emptyContent())
+    private val contents: MutableList<IHotpotContent> =
+        DefaultedList.ofSize(8, HotpotContents.emptyContent.createContent())
     private var soup: IHotpotSoup = HotpotSoups.emptySoup()
     var renderedWaterLevel = -1f
     var waterLevel = 0f
@@ -93,18 +92,18 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
 
     private fun placeContent(section: Int, content: IHotpotContent, pos: BlockPosWithLevel) {
         val remappedContent: IHotpotContent? = soup.remapContent(content, this, pos)
-        contents[section] = remappedContent ?: HotpotContents.emptyContent()
+        contents[section] = remappedContent ?: HotpotContents.emptyContent.createContent()
         HotpotSoups.ifMatchSoup(this, pos) { setSoup(it, pos) }
         markDataChanged()
     }
 
-    fun consumeContent(operator: UnaryOperator<IHotpotContent>) {
+    fun consumeContent(operator: (IHotpotContent) -> IHotpotContent) {
         contents.replaceAll(operator)
         markDataChanged()
     }
 
     fun consumeAllContents() {
-        consumeContent { HotpotContents.emptyContent() }
+        consumeContent { HotpotContents.emptyContent.createContent() }
     }
 
     private fun synchronizeSoup(selfPos: BlockPosWithLevel) {
@@ -136,7 +135,7 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
             soup.takeOutContentViaHand(
                 content, soup.takeOutContentViaChopstick(content, content.takeOut(this, pos), this, pos), this, pos
             )
-            contents[contentSection] = HotpotContents.emptyContent()
+            contents[contentSection] = HotpotContents.emptyContent.createContent()
             markDataChanged()
         }
     }
@@ -146,7 +145,7 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
         val content: IHotpotContent = contents[contentSection]
         if (content !is HotpotEmptyContent) {
             val itemStack: ItemStack = soup.takeOutContentViaChopstick(content, content.takeOut(this, pos), this, pos)
-            contents[contentSection] = HotpotContents.emptyContent()
+            contents[contentSection] = HotpotContents.emptyContent.createContent()
             markDataChanged()
             return itemStack
         }
@@ -165,7 +164,7 @@ class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
         for (i in 0 until contents.size) {
             val content: IHotpotContent = contents[i]
             soup.takeOutContentViaHand(content, content.takeOut(this, pos), this, pos)
-            contents[i] = HotpotContents.emptyContent()
+            contents[i] = HotpotContents.emptyContent.createContent()
         }
         markDataChanged()
     }

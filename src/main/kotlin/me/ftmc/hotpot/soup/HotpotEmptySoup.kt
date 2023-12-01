@@ -61,7 +61,7 @@ class HotpotEmptySoup : IHotpotSoup {
         hotpotBlockEntity: HotpotBlockEntity,
         pos: BlockPosWithLevel
     ): IHotpotContent {
-        return HotpotContents.emptyContent()
+        return HotpotContents.emptyContent.createContent()
     }
 
     override fun getSynchronizer(

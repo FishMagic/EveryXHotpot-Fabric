@@ -25,7 +25,7 @@ class HotpotBlastFurnaceRecipeContent : AbstractHotpotCookingRecipeContent {
     }
 
     override val id: String
-        get() = "BlastingItemStack"
+        get() = "blasting_recipe_content"
 
     companion object {
         fun hasBlastingRecipe(itemStack: ItemStack, pos: BlockPosWithLevel): Boolean {

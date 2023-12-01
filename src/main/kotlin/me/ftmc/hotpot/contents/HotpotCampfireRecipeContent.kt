@@ -16,5 +16,5 @@ class HotpotCampfireRecipeContent : AbstractHotpotCookingRecipeContent {
     }
 
     override val id: String
-        get() = "ItemStack"
+        get() = "campfire_recipe_content"
 }

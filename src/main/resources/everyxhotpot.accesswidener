@@ -6,3 +6,5 @@ mutable field net/minecraft/client/texture/SpriteContents animation Lnet/minecra
 accessible field net/minecraft/client/render/block/BlockModelRenderer DIRECTIONS [Lnet/minecraft/util/math/Direction;
 accessible method net/minecraft/client/render/block/BlockModelRenderer renderQuads (Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;FFFLjava/util/List;II)V
 accessible field net/minecraft/client/texture/SpriteContents image Lnet/minecraft/client/texture/NativeImage;
+accessible class net/minecraft/registry/Registries$Initializer
+accessible method net/minecraft/registry/Registries create (Lnet/minecraft/registry/RegistryKey;Ljava/lang/String;Lnet/minecraft/registry/Registries$Initializer;)Lnet/minecraft/registry/DefaultedRegistry;

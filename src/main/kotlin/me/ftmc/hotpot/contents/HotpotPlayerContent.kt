@@ -146,7 +146,7 @@ class HotpotPlayerContent : IHotpotContent {
     }
 
     override val id: String
-        get() = "Player"
+        get() = "empty_content"
 
     companion object {
         val VALID_PARTS = arrayOf("head", "body", "right_arm", "left_arm", "right_leg", "left_leg")

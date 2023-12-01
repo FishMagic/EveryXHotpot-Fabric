@@ -51,7 +51,7 @@ class HotpotEmptyContent : IHotpotContent {
     }
 
     override val id: String
-        get() = "Empty"
+        get() = "empty_content"
 
     override fun toString(): String {
         return id
