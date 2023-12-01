@@ -26,7 +26,7 @@ class HotpotEmptyPlaceable : IHotpotPlaceable {
     }
 
     override val id: String
-        get() = "Empty"
+        get() = "empty_placeable"
 
     override fun interact(
         player: PlayerEntity,

@@ -54,7 +54,7 @@ class HotpotLongPlate : IHotpotPlaceable {
     }
 
     override val id: String
-        get() = "LongPlate"
+        get() = "long_plate"
 
     override fun interact(
         player: PlayerEntity,

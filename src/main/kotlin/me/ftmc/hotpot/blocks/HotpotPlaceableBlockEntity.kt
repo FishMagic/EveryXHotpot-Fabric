@@ -27,7 +27,7 @@ class HotpotPlaceableBlockEntity(pos: BlockPos, state: BlockState) :
     AbstractChopstickInteractiveBlockEntity(BlockEntityRegistrar.HOTPOT_PLACEABLE_BLOCK_ENTITY, pos, state) {
     private var contentChanged = true
     private val placeables: DefaultedList<IHotpotPlaceable> =
-        DefaultedList.ofSize(4, HotpotPlaceables.emptyPlaceable())
+        DefaultedList.ofSize(4, HotpotPlaceables.emptyPlaceable.createPlaceable())
     var isInfiniteContent = false
         private set
     private var canBeRemoved = true
@@ -83,7 +83,7 @@ class HotpotPlaceableBlockEntity(pos: BlockPos, state: BlockState) :
         if (placeable !is HotpotEmptyPlaceable) {
             placeable.onRemove(this, pos)
             pos.dropItemStack(placeable.getCloneItemStack(this, pos))
-            placeables[placeable.anchorPos] = HotpotPlaceables.emptyPlaceable()
+            placeables[placeable.anchorPos] = HotpotPlaceables.emptyPlaceable.createPlaceable()
             markDataChanged()
         }
         if (isEmpty) {
@@ -111,13 +111,14 @@ class HotpotPlaceableBlockEntity(pos: BlockPos, state: BlockState) :
             val placeable: IHotpotPlaceable = placeables[i]
             placeable.onRemove(this, pos)
             pos.dropItemStack(placeable.getCloneItemStack(this, pos))
-            placeables[i] = HotpotPlaceables.emptyPlaceable()
+            placeables[i] = HotpotPlaceables.emptyPlaceable.createPlaceable()
         }
         markDataChanged()
     }
 
     fun getPlaceableInPos(hitPos: Int): IHotpotPlaceable {
-        return placeables.firstOrNull { it.getPos().contains(hitPos) } ?: HotpotPlaceables.emptyPlaceable()
+        return placeables.firstOrNull { it.getPos().contains(hitPos) }
+            ?: HotpotPlaceables.emptyPlaceable.createPlaceable()
     }
 
     fun markDataChanged() {

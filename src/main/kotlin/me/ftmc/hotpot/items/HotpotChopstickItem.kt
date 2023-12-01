@@ -2,23 +2,28 @@ package me.ftmc.hotpot.items
 
 import me.ftmc.hotpot.BlockPosWithLevel
 import me.ftmc.hotpot.HotpotTagsHelper
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
-import me.ftmc.hotpot.placeables.HotpotPlaceables
 import me.ftmc.hotpot.placeables.HotpotPlacedChopstick
 import me.ftmc.hotpot.placeables.IHotpotPlaceable
+import me.ftmc.hotpot.placeables.PlaceableRegistrar
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.util.UseAction
 import net.minecraft.world.World
 
 
 class HotpotChopstickItem :
-    HotpotPlaceableBlockItem(HotpotPlaceables.getPlaceableOrElseEmpty("PlacedChopstick"), Settings().maxCount(1)) {
+    HotpotPlaceableBlockItem({
+                                 PlaceableRegistrar.PLACEABLES.get(Identifier(MOD_ID, "placed_chopstick"))
+                                     .createPlaceable()
+                             }, Settings().maxCount(1)) {
     override fun shouldPlace(player: PlayerEntity?, hand: Hand, pos: BlockPosWithLevel): Boolean {
         return player?.isInSneakingPose ?: false
     }

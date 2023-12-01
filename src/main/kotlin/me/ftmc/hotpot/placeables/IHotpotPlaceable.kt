@@ -2,6 +2,7 @@ package me.ftmc.hotpot.placeables
 
 import me.ftmc.hotpot.BlockPosWithLevel
 import me.ftmc.hotpot.IHotpotSavableWIthSlot
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.Direction
 import kotlin.experimental.and
@@ -51,6 +53,18 @@ interface IHotpotPlaceable : IHotpotSavableWIthSlot<IHotpotPlaceable> {
     fun isConflict(pos: Int): Boolean
 
     companion object {
+
+        val ID_FIXES = mapOf(
+            "Empty" to "empty_placeable",
+            "LongPlate" to "long_plate",
+            "SmallPlate" to "small_plate",
+            "PlacedChopstick" to "placed_chopstick"
+        )
+
+        fun fixID(id: String): String {
+            return ID_FIXES[id] ?: id
+        }
+
         fun getSlotX(slot: Int): Float {
             return if (2 and slot > 0) 0.5f else 0f
         }
@@ -72,10 +86,11 @@ interface IHotpotPlaceable : IHotpotSavableWIthSlot<IHotpotPlaceable> {
 
         fun load(compoundTag: NbtCompound, consumer: (Int, IHotpotPlaceable) -> Unit) {
             val placeable: IHotpotPlaceable =
-                HotpotPlaceables.getPlaceableOrElseEmpty(compoundTag.getString("Type"))()
+                PlaceableRegistrar.PLACEABLES.get(Identifier(MOD_ID, fixID(compoundTag.getString("Type"))))
+                    .createPlaceable()
             consumer(
                 (compoundTag.getByte("Slot") and 255.toByte()).toInt(),
-                placeable.loadOrElseGet(compoundTag, HotpotPlaceables.emptyPlaceable)
+                placeable.loadOrElseGet(compoundTag) { HotpotPlaceables.emptyPlaceable.createPlaceable() }
             )
         }
 

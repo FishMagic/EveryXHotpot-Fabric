@@ -3,7 +3,7 @@ package me.ftmc.hotpot.items
 import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.BlockRegistrar
 import me.ftmc.hotpot.logger
-import me.ftmc.hotpot.placeables.HotpotPlaceables
+import me.ftmc.hotpot.placeables.PlaceableRegistrar
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
@@ -21,13 +21,19 @@ object ItemRegistrar {
     val HOTPOT_SMALL_PLATE_BLOCK_ITEM: HotpotPlaceableBlockItem = Registry.register(
         Registries.ITEM,
         Identifier(MOD_ID, "hotpot_small_plate"),
-        HotpotPlaceableBlockItem(HotpotPlaceables.getPlaceableOrElseEmpty("SmallPlate"))
+        HotpotPlaceableBlockItem({
+                                     PlaceableRegistrar.PLACEABLES.get(Identifier(MOD_ID, "small_plate"))
+                                         .createPlaceable()
+                                 })
     )
 
     val HOTPOT_LONG_PLATE_BLOCK_ITEM: HotpotPlaceableBlockItem = Registry.register(
         Registries.ITEM,
         Identifier(MOD_ID, "hotpot_long_plate"),
-        HotpotPlaceableBlockItem(HotpotPlaceables.getPlaceableOrElseEmpty("LongPlate"))
+        HotpotPlaceableBlockItem({
+                                     PlaceableRegistrar.PLACEABLES.get(Identifier(MOD_ID, "long_plate"))
+                                         .createPlaceable()
+                                 })
     )
 
     val HOTPOT_CHOPSTICK: HotpotChopstickItem = Registry.register(
