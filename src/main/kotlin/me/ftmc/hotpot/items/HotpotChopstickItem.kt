@@ -1,7 +1,6 @@
 package me.ftmc.hotpot.items
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.HotpotTagsHelper
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
 import me.ftmc.hotpot.placeables.HotpotPlaceables
@@ -103,7 +102,7 @@ class HotpotChopstickItem :
 
         fun getChopstickFoodItemStack(itemStack: ItemStack): ItemStack {
             var chopstickFoodItemStack: ItemStack = ItemStack.EMPTY
-            if (itemStack.isOf(EveryXHotpot.HOTPOT_CHOPSTICK)
+            if (itemStack.isOf(ItemRegistrar.HOTPOT_CHOPSTICK)
                 && HotpotTagsHelper.hasHotpotTag(itemStack)
                 && HotpotTagsHelper.getHotpotTag(itemStack)
                     .contains("ChopstickContent", NbtElement.COMPOUND_TYPE.toInt())

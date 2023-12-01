@@ -25,7 +25,7 @@ import java.util.function.UnaryOperator
 
 
 class HotpotBlockEntity(pos: BlockPos, state: BlockState) :
-    AbstractChopstickInteractiveBlockEntity(EveryXHotpot.HOTPOT_BLOCK_ENTITY, pos, state) {
+    AbstractChopstickInteractiveBlockEntity(BlockEntityRegistrar.HOTPOT_BLOCK_ENTITY, pos, state) {
     private var contentChanged = true
     private var soupSynchronized = false
     private val contents: MutableList<IHotpotContent> = DefaultedList.ofSize(8, HotpotContents.emptyContent())

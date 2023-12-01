@@ -1,10 +1,11 @@
 package me.ftmc.hotpot.placeables
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
 import me.ftmc.hotpot.forge.net.minecraft.client.renderer.block.renderModel
 import me.ftmc.hotpot.forge.net.minecraftforge.client.model.data.ModelData
+import me.ftmc.hotpot.items.ItemRegistrar
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
@@ -113,7 +114,7 @@ class HotpotLongPlate : IHotpotPlaceable {
         poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(direction.asRotation()))
         poseStack.scale(0.8f, 0.8f, 0.8f)
         val model: BakedModel? = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "block/hotpot_plate_long"))
+            .getModel(Identifier(MOD_ID, "block/hotpot_plate_long"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getSolid()),
@@ -159,7 +160,7 @@ class HotpotLongPlate : IHotpotPlaceable {
         hotpotPlateBlockEntity: HotpotPlaceableBlockEntity,
         level: BlockPosWithLevel
     ): ItemStack {
-        return ItemStack(EveryXHotpot.HOTPOT_LONG_PLATE_BLOCK_ITEM)
+        return ItemStack(ItemRegistrar.HOTPOT_LONG_PLATE_BLOCK_ITEM)
     }
 
     fun renderLargePlateItem(

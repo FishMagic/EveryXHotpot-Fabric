@@ -2,6 +2,7 @@ package me.ftmc.hotpot.spices
 
 import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.HotpotTagsHelper
+import me.ftmc.hotpot.items.ItemRegistrar
 import net.minecraft.inventory.RecipeInputInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
@@ -22,7 +23,7 @@ class HotpotSpicePackRecipe(id: Identifier, category: CraftingRecipeCategory) : 
             .with { it.isIn(ItemTags.SMALL_FLOWERS) }
             .collect(list::add).atLeast(1)
             .with {
-                it.isOf(EveryXHotpot.HOTPOT_SPICE_PACK)
+                it.isOf(ItemRegistrar.HOTPOT_SPICE_PACK)
                         && (if (HotpotTagsHelper.hasHotpotTag(it)) HotpotTagsHelper.getHotpotTag(it)
                     .getList("Spices", NbtElement.COMPOUND_TYPE.toInt())
                     .size else 0) + list.size <= 4
@@ -33,7 +34,7 @@ class HotpotSpicePackRecipe(id: Identifier, category: CraftingRecipeCategory) : 
 
     override fun craft(craftingContainer: RecipeInputInventory, registryAccess: DynamicRegistryManager): ItemStack {
         return HotpotSpiceAssembler(craftingContainer)
-            .withExisting({ it.isOf(EveryXHotpot.HOTPOT_SPICE_PACK) }) { ItemStack(EveryXHotpot.HOTPOT_SPICE_PACK) } /*.filter(itemStack -> !HotpotSpicePackRecipe.PREDICATE.test(itemStack))*/
+            .withExisting({ it.isOf(ItemRegistrar.HOTPOT_SPICE_PACK) }) { ItemStack(ItemRegistrar.HOTPOT_SPICE_PACK) } /*.filter(itemStack -> !HotpotSpicePackRecipe.PREDICATE.test(itemStack))*/
             .forEach { assembled, itemStack ->
                 val list = HotpotTagsHelper.getHotpotTag(assembled).getList("Spices", NbtElement.COMPOUND_TYPE.toInt())
                 list.add(itemStack.copyWithCount(1).writeNbt(NbtCompound()))

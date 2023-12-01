@@ -1,8 +1,9 @@
 package me.ftmc.hotpot.soup
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
+import me.ftmc.hotpot.soup.effects.EffectRegistrar
 import me.ftmc.hotpot.soup.effects.HotpotEffectHelper
 import me.ftmc.hotpot.soup.renderers.HotpotBubbleRenderer
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
@@ -24,13 +25,13 @@ class HotpotClearSoup : AbstractHotpotWaterBasedSoup() {
     }
 
     override fun addEffectToItem(itemStack: ItemStack, hotpotBlockEntity: HotpotBlockEntity, pos: BlockPosWithLevel) {
-        HotpotEffectHelper.saveEffects(itemStack, StatusEffectInstance(EveryXHotpot.HOTPOT_WARM, 15 * 20, 0))
+        HotpotEffectHelper.saveEffects(itemStack, StatusEffectInstance(EffectRegistrar.HOTPOT_WARM, 15 * 20, 0))
     }
 
     override val bubbleResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup_bubble")
+        get() = Identifier(MOD_ID, "soup/hotpot_clear_soup_bubble")
     override val soupResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup")
+        get() = Identifier(MOD_ID, "soup/hotpot_clear_soup")
     override val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
         get() = listOf(HOTPOT_BUBBLE_RENDERER)
 
@@ -39,7 +40,7 @@ class HotpotClearSoup : AbstractHotpotWaterBasedSoup() {
             0.35f,
             0.6f,
             50,
-            Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup_bubble")
+            Identifier(MOD_ID, "soup/hotpot_clear_soup_bubble")
         )
     }
 }

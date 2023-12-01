@@ -1,7 +1,6 @@
 package me.ftmc.hotpot.blocks
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.items.HotpotPlaceableBlockItem
 import net.minecraft.block.BlockState
 import net.minecraft.block.BlockWithEntity
@@ -98,7 +97,7 @@ class HotpotPlaceableBlock : BlockWithEntity(
     ): BlockEntityTicker<T>? {
         return if (level.isClient) null else checkType(
             blockEntityType,
-            EveryXHotpot.HOTPOT_PLACEABLE_BLOCK_ENTITY,
+            BlockEntityRegistrar.HOTPOT_PLACEABLE_BLOCK_ENTITY,
             HotpotPlaceableBlockEntity::tick
         )
     }

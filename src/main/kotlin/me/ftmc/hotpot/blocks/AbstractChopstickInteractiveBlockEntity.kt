@@ -1,8 +1,8 @@
 package me.ftmc.hotpot.blocks
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.items.HotpotChopstickItem
+import me.ftmc.hotpot.items.ItemRegistrar
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
@@ -24,7 +24,7 @@ abstract class AbstractChopstickInteractiveBlockEntity(
         itemStack: ItemStack,
         selfPos: BlockPosWithLevel
     ) {
-        if (itemStack.isOf(EveryXHotpot.HOTPOT_CHOPSTICK)) {
+        if (itemStack.isOf(ItemRegistrar.HOTPOT_CHOPSTICK)) {
             var chopstickFoodItemStack: ItemStack = HotpotChopstickItem.getChopstickFoodItemStack(itemStack)
             chopstickFoodItemStack = if (chopstickFoodItemStack.isEmpty) tryTakeOutContentViaChopstick(
                 hitSection,

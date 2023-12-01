@@ -1,7 +1,7 @@
 package me.ftmc.hotpot.items
 
-import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.HotpotTagsHelper
+import me.ftmc.hotpot.MOD_ID
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.item.BuiltinModelItemRenderer
@@ -24,12 +24,12 @@ class HotpotBlockEntityWithoutLevelRenderer : BuiltinModelItemRenderer(null, nul
         combinedLight: Int,
         combinedOverlay: Int
     ) {
-        if (itemStack.isOf(EveryXHotpot.HOTPOT_CHOPSTICK)) {
+        if (itemStack.isOf(ItemRegistrar.HOTPOT_CHOPSTICK)) {
             poseStack.push()
             poseStack.translate(0.5f, 0.5f, 0.5f)
             val chopstickModel = MinecraftClient.getInstance()
                 .bakedModelManager
-                .getModel(Identifier(EveryXHotpot.MOD_ID, "item/hotpot_chopstick_model"))
+                .getModel(Identifier(MOD_ID, "item/hotpot_chopstick_model"))
             MinecraftClient.getInstance()
                 .itemRenderer
                 .renderItem(
@@ -66,12 +66,12 @@ class HotpotBlockEntityWithoutLevelRenderer : BuiltinModelItemRenderer(null, nul
                     )
                 poseStack.pop()
             }
-        } else if (itemStack.isOf(EveryXHotpot.HOTPOT_SPICE_PACK)) {
+        } else if (itemStack.isOf(ItemRegistrar.HOTPOT_SPICE_PACK)) {
             poseStack.push()
             poseStack.translate(0.5f, 0.5f, 0.5f)
             val spicePackModel = MinecraftClient.getInstance()
                 .bakedModelManager
-                .getModel(Identifier(EveryXHotpot.MOD_ID, "item/hotpot_spice_pack_model"))
+                .getModel(Identifier(MOD_ID, "item/hotpot_spice_pack_model"))
             MinecraftClient.getInstance()
                 .itemRenderer
                 .renderItem(

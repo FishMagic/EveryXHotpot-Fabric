@@ -1,7 +1,7 @@
 package me.ftmc.hotpot.mixin;
 
-import me.ftmc.hotpot.EveryXHotpot;
 import me.ftmc.hotpot.items.HotpotChopstickItem;
+import me.ftmc.hotpot.items.ItemRegistrar;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.CrackParticle;
 import net.minecraft.client.particle.SpriteBillboardParticle;
@@ -21,7 +21,7 @@ public abstract class BreakingItemParticleMixin extends SpriteBillboardParticle 
 
     @Inject(method = "<init>(Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/item/ItemStack;)V", at = @At("RETURN"))
     public void constructor(ClientWorld level, double p_105666_, double p_105667_, double p_105668_, ItemStack itemStack, CallbackInfo ci) {
-        if (itemStack.isOf(EveryXHotpot.INSTANCE.getHOTPOT_CHOPSTICK())) {
+        if (itemStack.isOf(ItemRegistrar.INSTANCE.getHOTPOT_CHOPSTICK())) {
             ItemStack chopstickFoodItemStack;
 
             if (!(chopstickFoodItemStack = HotpotChopstickItem.Companion.getChopstickFoodItemStack(itemStack)).isEmpty()) {

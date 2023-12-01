@@ -1,7 +1,7 @@
 package me.ftmc.hotpot.items
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
+import me.ftmc.hotpot.blocks.BlockRegistrar
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
 import me.ftmc.hotpot.placeables.IHotpotPlaceable
 import net.minecraft.entity.player.PlayerEntity
@@ -19,7 +19,7 @@ open class HotpotPlaceableBlockItem(
     private val supplier: () -> IHotpotPlaceable,
     properties: Settings = Settings().maxCount(64)
 ) : BlockItem(
-    EveryXHotpot.HOTPOT_PLACEABLE,
+    BlockRegistrar.HOTPOT_PLACEABLE,
     properties
 ) {
     open fun shouldPlace(player: PlayerEntity?, hand: Hand, pos: BlockPosWithLevel): Boolean {
@@ -43,7 +43,7 @@ open class HotpotPlaceableBlockItem(
         }
         val placeable: IHotpotPlaceable = supplier()
         val player = context.player
-        if (selfPos.isOf(EveryXHotpot.HOTPOT_PLACEABLE)
+        if (selfPos.isOf(BlockRegistrar.HOTPOT_PLACEABLE)
             && placeable.tryPlace(pos, direction)
             && tryPlace(selfPos, placeable, context.stack.copy())
         ) {

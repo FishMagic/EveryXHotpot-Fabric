@@ -3,7 +3,6 @@ package me.ftmc.hotpot.blocks
 import it.unimi.dsi.fastutil.objects.Object2IntMap
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
@@ -123,19 +122,19 @@ class HotpotBlock : BlockWithEntity(
         val northEast: BlockPosWithLevel = east.north()
         val eastSouth: BlockPosWithLevel = south.east()
         val southWest: BlockPosWithLevel = west.south()
-        val northValue: Boolean = north.isOf(EveryXHotpot.HOTPOT_BLOCK)
-        val southValue: Boolean = south.isOf(EveryXHotpot.HOTPOT_BLOCK)
-        val eastValue: Boolean = east.isOf(EveryXHotpot.HOTPOT_BLOCK)
-        val westValue: Boolean = west.isOf(EveryXHotpot.HOTPOT_BLOCK)
+        val northValue: Boolean = north.isOf(BlockRegistrar.HOTPOT_BLOCK)
+        val southValue: Boolean = south.isOf(BlockRegistrar.HOTPOT_BLOCK)
+        val eastValue: Boolean = east.isOf(BlockRegistrar.HOTPOT_BLOCK)
+        val westValue: Boolean = west.isOf(BlockRegistrar.HOTPOT_BLOCK)
         return state
             .with(NORTH, northValue)
             .with(SOUTH, southValue)
             .with(EAST, eastValue)
             .with(WEST, westValue)
-            .with(WEST_NORTH, westValue && northValue && westNorth.isOf(EveryXHotpot.HOTPOT_BLOCK))
-            .with(NORTH_EAST, northValue && eastValue && northEast.isOf(EveryXHotpot.HOTPOT_BLOCK))
-            .with(EAST_SOUTH, eastValue && southValue && eastSouth.isOf(EveryXHotpot.HOTPOT_BLOCK))
-            .with(SOUTH_WEST, southValue && westValue && southWest.isOf(EveryXHotpot.HOTPOT_BLOCK))
+            .with(WEST_NORTH, westValue && northValue && westNorth.isOf(BlockRegistrar.HOTPOT_BLOCK))
+            .with(NORTH_EAST, northValue && eastValue && northEast.isOf(BlockRegistrar.HOTPOT_BLOCK))
+            .with(EAST_SOUTH, eastValue && southValue && eastSouth.isOf(BlockRegistrar.HOTPOT_BLOCK))
+            .with(SOUTH_WEST, southValue && westValue && southWest.isOf(BlockRegistrar.HOTPOT_BLOCK))
             .with(SEPARATOR_NORTH, northValue && !HotpotBlockEntity.isSameSoup(selfPos, north))
             .with(SEPARATOR_SOUTH, southValue && !HotpotBlockEntity.isSameSoup(selfPos, south))
             .with(SEPARATOR_EAST, eastValue && !HotpotBlockEntity.isSameSoup(selfPos, east))
@@ -236,7 +235,7 @@ class HotpotBlock : BlockWithEntity(
     ): BlockEntityTicker<T>? {
         return if (level.isClient) null else checkType(
             blockEntityType,
-            EveryXHotpot.HOTPOT_BLOCK_ENTITY,
+            BlockEntityRegistrar.HOTPOT_BLOCK_ENTITY,
             HotpotBlockEntity::tick
         )
     }

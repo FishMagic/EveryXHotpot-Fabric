@@ -1,7 +1,7 @@
 package me.ftmc.hotpot.placeables
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
 import me.ftmc.hotpot.forge.net.minecraft.client.renderer.block.renderModel
 import me.ftmc.hotpot.forge.net.minecraftforge.client.model.data.ModelData
@@ -110,7 +110,7 @@ class HotpotPlacedChopstick : IHotpotPlaceable {
         poseStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(direction.asRotation()))
         poseStack.scale(0.5f, 0.5f, 0.5f)
         val model = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "block/hotpot_chopstick_stand"))
+            .getModel(Identifier(MOD_ID, "block/hotpot_chopstick_stand"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getSolid()),

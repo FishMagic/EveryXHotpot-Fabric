@@ -1,7 +1,6 @@
 package me.ftmc.hotpot.blocks
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.placeables.HotpotEmptyPlaceable
 import me.ftmc.hotpot.placeables.HotpotPlaceables
 import me.ftmc.hotpot.placeables.IHotpotPlaceable
@@ -25,7 +24,7 @@ import net.minecraft.world.World
 
 
 class HotpotPlaceableBlockEntity(pos: BlockPos, state: BlockState) :
-    AbstractChopstickInteractiveBlockEntity(EveryXHotpot.HOTPOT_PLACEABLE_BLOCK_ENTITY, pos, state) {
+    AbstractChopstickInteractiveBlockEntity(BlockEntityRegistrar.HOTPOT_PLACEABLE_BLOCK_ENTITY, pos, state) {
     private var contentChanged = true
     private val placeables: DefaultedList<IHotpotPlaceable> =
         DefaultedList.ofSize(4, HotpotPlaceables.emptyPlaceable())

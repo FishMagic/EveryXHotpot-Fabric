@@ -1,10 +1,11 @@
 package me.ftmc.hotpot.placeables
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
 import me.ftmc.hotpot.forge.net.minecraft.client.renderer.block.renderModel
 import me.ftmc.hotpot.forge.net.minecraftforge.client.model.data.ModelData
+import me.ftmc.hotpot.items.ItemRegistrar
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
@@ -96,7 +97,7 @@ class HotpotSmallPlate : IHotpotPlaceable {
         poseStack.translate(x, 0f, z)
         poseStack.scale(0.8f, 0.8f, 0.8f)
         val model = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "block/hotpot_plate_small"))
+            .getModel(Identifier(MOD_ID, "block/hotpot_plate_small"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getTranslucent()),
@@ -126,7 +127,7 @@ class HotpotSmallPlate : IHotpotPlaceable {
         hotpotPlateBlockEntity: HotpotPlaceableBlockEntity,
         level: BlockPosWithLevel
     ): ItemStack {
-        return ItemStack(EveryXHotpot.HOTPOT_SMALL_PLATE_BLOCK_ITEM)
+        return ItemStack(ItemRegistrar.HOTPOT_SMALL_PLATE_BLOCK_ITEM)
     }
 
     override fun tryPlace(pos: Int, direction: Direction): Boolean {

@@ -1,6 +1,6 @@
 package me.ftmc.hotpot.soup.renderers
 
-import me.ftmc.hotpot.EveryXHotpot
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.forge.net.minecraft.client.renderer.block.renderModel
 import me.ftmc.hotpot.forge.net.minecraftforge.client.model.data.ModelData
@@ -35,7 +35,7 @@ class HotpotSpicySoupFloatingPepperRenderer : IHotpotSoupCustomElementRenderer {
         poseStack.translate(0f, part1Position, 0f)
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(part1Rotation))
         val part1Model: BakedModel? = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_floating_pepper_1"))
+            .getModel(Identifier(MOD_ID, "soup/hotpot_spicy_soup_floating_pepper_1"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getTranslucent()),
@@ -54,7 +54,7 @@ class HotpotSpicySoupFloatingPepperRenderer : IHotpotSoupCustomElementRenderer {
         poseStack.translate(0f, part2Position, 0f)
         poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(part2Rotation))
         val part2Model: BakedModel? = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_floating_pepper_2"))
+            .getModel(Identifier(MOD_ID, "soup/hotpot_spicy_soup_floating_pepper_2"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getTranslucent()),

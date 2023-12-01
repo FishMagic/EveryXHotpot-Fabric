@@ -1,6 +1,6 @@
 package me.ftmc.hotpot.mixin;
 
-import me.ftmc.hotpot.EveryXHotpot;
+import me.ftmc.hotpot.soup.effects.EffectRegistrar;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +16,6 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "canFreeze", at = @At("RETURN"), cancellable = true)
     public void canFreeze(CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!hasStatusEffect(EveryXHotpot.INSTANCE.getHOTPOT_WARM()) && cir.getReturnValue());
+        cir.setReturnValue(!hasStatusEffect(EffectRegistrar.INSTANCE.getHOTPOT_WARM()) && cir.getReturnValue());
     }
 }

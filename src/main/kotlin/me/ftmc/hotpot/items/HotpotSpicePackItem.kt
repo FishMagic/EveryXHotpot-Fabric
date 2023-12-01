@@ -1,7 +1,6 @@
 package me.ftmc.hotpot.items
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.HotpotTagsHelper
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.contents.IHotpotContent
@@ -37,7 +36,7 @@ class HotpotSpicePackItem : Item(Settings()), IHotpotSpecialContentItem {
         hotpotBlockEntity: HotpotBlockEntity,
         pos: BlockPosWithLevel
     ): ItemStack {
-        if (itemStack.isOf(EveryXHotpot.HOTPOT_SPICE_PACK)) {
+        if (itemStack.isOf(ItemRegistrar.HOTPOT_SPICE_PACK)) {
             return itemStack
         }
         if (!isSpiceTagValid(selfItemStack)) {
@@ -58,7 +57,7 @@ class HotpotSpicePackItem : Item(Settings()), IHotpotSpecialContentItem {
         hotpotBlockEntity: HotpotBlockEntity,
         pos: BlockPosWithLevel
     ): ItemStack {
-        return if (isSpiceTagValid(selfItemStack) && getSpiceAmount(selfItemStack) <= 0) ItemStack(EveryXHotpot.HOTPOT_SPICE_PACK) else selfItemStack
+        return if (isSpiceTagValid(selfItemStack) && getSpiceAmount(selfItemStack) <= 0) ItemStack(ItemRegistrar.HOTPOT_SPICE_PACK) else selfItemStack
     }
 
     override fun appendTooltip(

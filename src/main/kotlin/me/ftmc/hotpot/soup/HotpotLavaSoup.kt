@@ -1,7 +1,7 @@
 package me.ftmc.hotpot.soup
 
 import me.ftmc.hotpot.BlockPosWithLevel
-import me.ftmc.hotpot.EveryXHotpot
+import me.ftmc.hotpot.MOD_ID
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.contents.HotpotBlastFurnaceRecipeContent
 import me.ftmc.hotpot.contents.IHotpotContent
@@ -36,9 +36,9 @@ class HotpotLavaSoup : AbstractHotpotFluidBasedSoup(
     override val waterLevelDropRate: Float
         get() = 0.05f
     override val bubbleResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_lava_soup_bubble")
+        get() = Identifier(MOD_ID, "soup/hotpot_lava_soup_bubble")
     override val soupResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_lava_soup")
+        get() = Identifier(MOD_ID, "soup/hotpot_lava_soup")
     override val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
         get() = listOf()
 }

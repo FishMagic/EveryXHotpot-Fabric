@@ -1,7 +1,7 @@
 package me.ftmc.hotpot.mixin;
 
-import me.ftmc.hotpot.EveryXHotpot;
 import me.ftmc.hotpot.EveryXHotpotClient;
+import me.ftmc.hotpot.items.ItemRegistrar;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -23,8 +23,8 @@ public class ItemRenderMixin {
             )
     )
     public void renderItem(BuiltinModelItemRenderer instance, ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if (stack.isOf(EveryXHotpot.INSTANCE.getHOTPOT_CHOPSTICK())
-                || stack.isOf(EveryXHotpot.INSTANCE.getHOTPOT_SPICE_PACK())
+        if (stack.isOf(ItemRegistrar.INSTANCE.getHOTPOT_CHOPSTICK())
+                || stack.isOf(ItemRegistrar.INSTANCE.getHOTPOT_SPICE_PACK())
         ) {
             EveryXHotpotClient.INSTANCE.getHOTPOT_BEWLR().render(stack, mode, matrices, vertexConsumers, light, overlay);
         } else {
