@@ -6,6 +6,7 @@ import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.soup.effects.HotpotEffectHelper
 import me.ftmc.hotpot.soup.renderers.HotpotBubbleRenderer
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
@@ -29,8 +30,8 @@ class HotpotClearSoup : AbstractHotpotWaterBasedSoup() {
 
     override val bubbleResourceLocation: Identifier
         get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup_bubble")
-    override val soupResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup")
+    override val soupResourceLocation: ModelIdentifier?
+        get() = ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup")
     override val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
         get() = listOf(HOTPOT_BUBBLE_RENDERER)
 
@@ -39,7 +40,7 @@ class HotpotClearSoup : AbstractHotpotWaterBasedSoup() {
             0.35f,
             0.6f,
             50,
-            Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup_bubble")
+            ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup_bubble")
         )
     }
 }

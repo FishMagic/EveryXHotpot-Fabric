@@ -18,7 +18,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtHelper
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.RotationAxis
+import net.minecraft.util.math.Vec3f
 import net.minecraft.util.math.random.Random
 import kotlin.math.cos
 import kotlin.math.max
@@ -84,9 +84,9 @@ class HotpotPlayerContent : IHotpotContent {
             ) * ITEM_FLOAT_Y + 0.42f * waterline).toDouble(),
             0.5f + cos(f * 2f * Math.PI) * ITEM_RADIUS
         )
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(f * 360f))
+        poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(f * 360f))
         poseStack.multiply(
-            RotationAxis.POSITIVE_X.rotationDegrees(
+            Vec3f.POSITIVE_X.getDegreesQuaternion(
                 -90f + AbstractHotpotItemStackContent.getFloatingCurve(f, 1f) * ITEM_ROTATION
             )
         )
@@ -146,7 +146,7 @@ class HotpotPlayerContent : IHotpotContent {
     }
 
     override val id: String
-        get() = "Player"
+        get() = "empty_content"
 
     companion object {
         val VALID_PARTS = arrayOf("head", "body", "right_arm", "left_arm", "right_leg", "left_leg")

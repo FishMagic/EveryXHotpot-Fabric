@@ -19,7 +19,10 @@ import net.minecraft.world.World
 
 
 class HotpotChopstickItem :
-    HotpotPlaceableBlockItem(HotpotPlaceables.getPlaceableOrElseEmpty("PlacedChopstick"), Settings().maxCount(1)) {
+    HotpotPlaceableBlockItem(
+        HotpotPlaceables.getPlaceableOrElseEmpty("PlacedChopstick"),
+        Settings().maxCount(1).group(EveryXHotpot.EVERY_X_HOTPOT_TAB)
+    ) {
     override fun shouldPlace(player: PlayerEntity?, hand: Hand, pos: BlockPosWithLevel): Boolean {
         return player?.isInSneakingPose ?: false
     }

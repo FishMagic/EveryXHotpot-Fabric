@@ -9,15 +9,15 @@ import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.model.BakedModel
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.RotationAxis
+import net.minecraft.util.math.Vec3f
 
 
 class HotpotLongPlate : IHotpotPlaceable {
@@ -104,16 +104,16 @@ class HotpotLongPlate : IHotpotPlaceable {
         combinedLight: Int,
         combinedOverlay: Int
     ) {
-        val x1 = IHotpotPlaceable.getSlotX(pos1.toInt()) + 0.25f
-        val z1 = IHotpotPlaceable.getSlotZ(pos1.toInt()) + 0.25f
-        val x2 = IHotpotPlaceable.getSlotX(pos2.toInt()) + 0.25f
-        val z2 = IHotpotPlaceable.getSlotZ(pos2.toInt()) + 0.25f
+        val x1 = IHotpotPlaceable.getSlotX(pos1.toInt()) + 0.25
+        val z1 = IHotpotPlaceable.getSlotZ(pos1.toInt()) + 0.25
+        val x2 = IHotpotPlaceable.getSlotX(pos2.toInt()) + 0.25
+        val z2 = IHotpotPlaceable.getSlotZ(pos2.toInt()) + 0.25
         poseStack.push()
-        poseStack.translate((x1 + x2) / 2, 0f, (z1 + z2) / 2)
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(direction.asRotation()))
+        poseStack.translate((x1 + x2) / 2, 0.0, (z1 + z2) / 2)
+        poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(direction.asRotation()))
         poseStack.scale(0.8f, 0.8f, 0.8f)
         val model: BakedModel? = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "block/hotpot_plate_long"))
+            .getModel(ModelIdentifier(EveryXHotpot.MOD_ID, "block/hotpot_plate_long"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getSolid()),
@@ -169,15 +169,15 @@ class HotpotLongPlate : IHotpotPlaceable {
         combinedLight: Int,
         combinedOverlay: Int,
         slot: SimpleItemSlot,
-        x: Float,
-        z: Float,
+        x: Double,
+        z: Double,
         index: Int
     ) {
         poseStack.push()
-        poseStack.translate(x, 0.12f, z)
-        poseStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(direction.asRotation()))
-        poseStack.translate(0f, 0f, -0.14f + index * 0.09f)
-        poseStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(75f))
+        poseStack.translate(x, 0.12, z)
+        poseStack.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(direction.asRotation()))
+        poseStack.translate(0.0, 0.0, -0.14 + index * 0.09f)
+        poseStack.multiply(Vec3f.NEGATIVE_X.getDegreesQuaternion(75f))
         poseStack.scale(0.35f, 0.35f, 0.35f)
         slot.renderSlot(context, poseStack, bufferSource, combinedLight, combinedOverlay)
         poseStack.pop()

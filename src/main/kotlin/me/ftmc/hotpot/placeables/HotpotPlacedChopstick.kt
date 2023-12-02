@@ -8,16 +8,16 @@ import me.ftmc.hotpot.forge.net.minecraftforge.client.model.data.ModelData
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.model.json.ModelTransformationMode
+import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.RotationAxis
+import net.minecraft.util.math.Vec3f
 
 
 class HotpotPlacedChopstick : IHotpotPlaceable {
@@ -83,34 +83,34 @@ class HotpotPlacedChopstick : IHotpotPlaceable {
         combinedLight: Int,
         combinedOverlay: Int
     ) {
-        val x1 = IHotpotPlaceable.getSlotX(pos1.toInt()) + 0.25f
-        val z1 = IHotpotPlaceable.getSlotZ(pos1.toInt()) + 0.25f
-        val x2 = IHotpotPlaceable.getSlotX(pos2.toInt()) + 0.25f
-        val z2 = IHotpotPlaceable.getSlotZ(pos2.toInt()) + 0.25f
+        val x1 = IHotpotPlaceable.getSlotX(pos1.toInt()) + 0.25
+        val z1 = IHotpotPlaceable.getSlotZ(pos1.toInt()) + 0.25
+        val x2 = IHotpotPlaceable.getSlotX(pos2.toInt()) + 0.25
+        val z2 = IHotpotPlaceable.getSlotZ(pos2.toInt()) + 0.25
         poseStack.push()
-        poseStack.translate((x1 + x2) / 2, 0.07f, (z1 + z2) / 2)
-        poseStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(direction.asRotation()))
-        poseStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(95f))
+        poseStack.translate((x1 + x2) / 2, 0.07, (z1 + z2) / 2)
+        poseStack.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(direction.asRotation()))
+        poseStack.multiply(Vec3f.NEGATIVE_X.getDegreesQuaternion(95f))
         poseStack.scale(0.5f, 0.5f, 0.5f)
         context.itemRenderer.renderItem(
             null,
             chopstickItemStack,
-            ModelTransformationMode.NONE,
+            ModelTransformation.Mode.NONE,
             true,
             poseStack,
             bufferSource,
             null,
             combinedLight,
             combinedOverlay,
-            ModelTransformationMode.FIXED.ordinal
+            ModelTransformation.Mode.FIXED.ordinal
         )
         poseStack.pop()
         poseStack.push()
-        poseStack.translate((x1 + x2) / 2, 0f, (z1 + z2) / 2)
-        poseStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(direction.asRotation()))
+        poseStack.translate((x1 + x2) / 2, 0.0, (z1 + z2) / 2)
+        poseStack.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(direction.asRotation()))
         poseStack.scale(0.5f, 0.5f, 0.5f)
         val model = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "block/hotpot_chopstick_stand"))
+            .getModel(ModelIdentifier(EveryXHotpot.MOD_ID, "block/hotpot_chopstick_stand"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getSolid()),

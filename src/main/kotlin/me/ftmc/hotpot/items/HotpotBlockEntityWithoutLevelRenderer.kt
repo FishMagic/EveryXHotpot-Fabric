@@ -5,20 +5,20 @@ import me.ftmc.hotpot.HotpotTagsHelper
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.item.BuiltinModelItemRenderer
-import net.minecraft.client.render.model.json.ModelTransformationMode
+import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
-import net.minecraft.util.Identifier
-import net.minecraft.util.math.RotationAxis
+import net.minecraft.util.math.Vec3f
 import kotlin.math.max
 
 
 class HotpotBlockEntityWithoutLevelRenderer : BuiltinModelItemRenderer(null, null) {
     override fun render(
         itemStack: ItemStack,
-        displayContext: ModelTransformationMode,
+        displayContext: ModelTransformation.Mode,
         poseStack: MatrixStack,
         bufferSource: VertexConsumerProvider,
         combinedLight: Int,
@@ -26,10 +26,10 @@ class HotpotBlockEntityWithoutLevelRenderer : BuiltinModelItemRenderer(null, nul
     ) {
         if (itemStack.isOf(EveryXHotpot.HOTPOT_CHOPSTICK)) {
             poseStack.push()
-            poseStack.translate(0.5f, 0.5f, 0.5f)
+            poseStack.translate(0.5, 0.5, 0.5)
             val chopstickModel = MinecraftClient.getInstance()
                 .bakedModelManager
-                .getModel(Identifier(EveryXHotpot.MOD_ID, "item/hotpot_chopstick_model"))
+                .getModel(ModelIdentifier(EveryXHotpot.MOD_ID, "item/hotpot_chopstick_model"))
             MinecraftClient.getInstance()
                 .itemRenderer
                 .renderItem(
@@ -48,30 +48,30 @@ class HotpotBlockEntityWithoutLevelRenderer : BuiltinModelItemRenderer(null, nul
                     .also { chopstickFoodItemStack = it }.isEmpty
             ) {
                 poseStack.push()
-                poseStack.translate(0.5f, 0.1f, 0.5f)
-                poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90f))
+                poseStack.translate(0.5, 0.1, 0.5)
+                poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90f))
                 MinecraftClient.getInstance()
                     .itemRenderer
                     .renderItem(
                         null,
                         chopstickFoodItemStack,
-                        ModelTransformationMode.FIXED,
+                        ModelTransformation.Mode.FIXED,
                         true,
                         poseStack,
                         bufferSource,
                         null,
                         combinedLight,
                         combinedOverlay,
-                        ModelTransformationMode.FIXED.ordinal
+                        ModelTransformation.Mode.FIXED.ordinal
                     )
                 poseStack.pop()
             }
         } else if (itemStack.isOf(EveryXHotpot.HOTPOT_SPICE_PACK)) {
             poseStack.push()
-            poseStack.translate(0.5f, 0.5f, 0.5f)
+            poseStack.translate(0.5, 0.5, 0.5)
             val spicePackModel = MinecraftClient.getInstance()
                 .bakedModelManager
-                .getModel(Identifier(EveryXHotpot.MOD_ID, "item/hotpot_spice_pack_model"))
+                .getModel(ModelIdentifier(EveryXHotpot.MOD_ID, "item/hotpot_spice_pack_model"))
             MinecraftClient.getInstance()
                 .itemRenderer
                 .renderItem(
@@ -92,24 +92,24 @@ class HotpotBlockEntityWithoutLevelRenderer : BuiltinModelItemRenderer(null, nul
                     .map { ItemStack.fromNbt(it as NbtCompound) }
                 else listOf()
             val startX = (0.3f - 0.3f / (itemStacks.size * 3f) * max(0.0, (itemStacks.size - 1).toDouble())).toFloat()
-            poseStack.translate(startX + 0.2f, 0.25f, 0.5f)
+            poseStack.translate(startX + 0.2, 0.25, 0.5)
             for (spiceItemStack in itemStacks) {
                 poseStack.push()
-                poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(30f))
+                poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(30f))
                 poseStack.scale(0.78f, 0.78f, 0.78f)
                 MinecraftClient.getInstance()
                     .itemRenderer
                     .renderItem(
                         null,
                         spiceItemStack,
-                        ModelTransformationMode.GROUND,
+                        ModelTransformation.Mode.GROUND,
                         true,
                         poseStack,
                         bufferSource,
                         null,
                         combinedLight,
                         combinedOverlay,
-                        ModelTransformationMode.FIXED.ordinal
+                        ModelTransformation.Mode.FIXED.ordinal
                     )
                 poseStack.pop()
                 poseStack.translate((0.3f / (itemStacks.size * 1.5f)).toDouble(), 0.0, 0.0)

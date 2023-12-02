@@ -5,19 +5,17 @@ import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.blocks.HotpotPlaceableBlockEntity
 import me.ftmc.hotpot.placeables.IHotpotPlaceable
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.BlockItem
-import net.minecraft.item.ItemPlacementContext
-import net.minecraft.item.ItemStack
-import net.minecraft.item.ItemUsageContext
+import net.minecraft.item.*
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.Direction
 
 
 open class HotpotPlaceableBlockItem(
     private val supplier: () -> IHotpotPlaceable,
-    properties: Settings = Settings().maxCount(64)
+    properties: Settings = Settings().maxCount(64).group(EveryXHotpot.EVERY_X_HOTPOT_TAB)
 ) : BlockItem(
     EveryXHotpot.HOTPOT_PLACEABLE,
     properties
@@ -36,7 +34,7 @@ open class HotpotPlaceableBlockItem(
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val selfPos: BlockPosWithLevel = BlockPosWithLevel.fromUseOnContext(context)
-        val direction: Direction = context.horizontalPlayerFacing
+        val direction: Direction = context.playerFacing
         val pos: Int = HotpotPlaceableBlockEntity.getHitPos(context)
         if (!shouldPlace(context.player, context.hand, selfPos)) {
             return ActionResult.PASS
@@ -57,9 +55,15 @@ open class HotpotPlaceableBlockItem(
         return super.useOnBlock(context)
     }
 
+    override fun appendStacks(group: ItemGroup, stacks: DefaultedList<ItemStack?>) {
+        if (isIn(group)) {
+            stacks.add(ItemStack(this))
+        }
+    }
+
     override fun place(context: ItemPlacementContext): ActionResult {
         val selfPos: BlockPosWithLevel = BlockPosWithLevel.fromBlockPlaceContext(context)
-        val direction: Direction = context.horizontalPlayerFacing
+        val direction: Direction = context.playerLookDirection
         val pos: Int = HotpotPlaceableBlockEntity.getHitPos(context)
         val itemStack: ItemStack = context.stack.copy()
         val placeable: IHotpotPlaceable = supplier()

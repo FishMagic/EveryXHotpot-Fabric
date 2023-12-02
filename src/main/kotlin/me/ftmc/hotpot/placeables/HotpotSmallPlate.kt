@@ -8,15 +8,15 @@ import me.ftmc.hotpot.forge.net.minecraftforge.client.model.data.ModelData
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.RotationAxis
+import net.minecraft.util.math.Vec3f
 
 
 class HotpotSmallPlate : IHotpotPlaceable {
@@ -90,13 +90,13 @@ class HotpotSmallPlate : IHotpotPlaceable {
         combinedLight: Int,
         combinedOverlay: Int
     ) {
-        val x = IHotpotPlaceable.getSlotX(pos.toInt()) + 0.25f
-        val z = IHotpotPlaceable.getSlotZ(pos.toInt()) + 0.25f
+        val x = IHotpotPlaceable.getSlotX(pos.toInt()) + 0.25
+        val z = IHotpotPlaceable.getSlotZ(pos.toInt()) + 0.25
         poseStack.push()
-        poseStack.translate(x, 0f, z)
+        poseStack.translate(x, 0.0, z)
         poseStack.scale(0.8f, 0.8f, 0.8f)
         val model = context.renderManager.models.modelManager
-            .getModel(Identifier(EveryXHotpot.MOD_ID, "block/hotpot_plate_small"))
+            .getModel(ModelIdentifier(EveryXHotpot.MOD_ID, "block/hotpot_plate_small"))
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
             bufferSource.getBuffer(RenderLayer.getTranslucent()),
@@ -114,8 +114,8 @@ class HotpotSmallPlate : IHotpotPlaceable {
         for (i in 0 until itemSlot.renderCount) {
             poseStack.push()
             poseStack.translate(x.toDouble(), 0.065f + 0.02 * i, z.toDouble())
-            poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(direction.asRotation() + i % 2 * 20))
-            poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90f))
+            poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(direction.asRotation() + i % 2 * 20))
+            poseStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90f))
             poseStack.scale(0.35f, 0.35f, 0.35f)
             itemSlot.renderSlot(context, poseStack, bufferSource, combinedLight, combinedOverlay)
             poseStack.pop()

@@ -6,6 +6,7 @@ import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.contents.HotpotBlastFurnaceRecipeContent
 import me.ftmc.hotpot.contents.IHotpotContent
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvents
@@ -37,8 +38,8 @@ class HotpotLavaSoup : AbstractHotpotFluidBasedSoup(
         get() = 0.05f
     override val bubbleResourceLocation: Identifier
         get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_lava_soup_bubble")
-    override val soupResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_lava_soup")
+    override val soupResourceLocation: ModelIdentifier?
+        get() = ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_lava_soup")
     override val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
         get() = listOf()
 }

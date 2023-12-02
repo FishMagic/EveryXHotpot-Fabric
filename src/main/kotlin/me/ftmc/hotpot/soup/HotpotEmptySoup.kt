@@ -6,6 +6,7 @@ import me.ftmc.hotpot.contents.HotpotContents
 import me.ftmc.hotpot.contents.IHotpotContent
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
 import me.ftmc.hotpot.soup.synchronizers.IHotpotSoupSynchronizer
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -113,7 +114,7 @@ class HotpotEmptySoup : IHotpotSoup {
     override fun tick(hotpotBlockEntity: HotpotBlockEntity, pos: BlockPosWithLevel) {}
     override val bubbleResourceLocation: Identifier?
         get() = null
-    override val soupResourceLocation: Identifier?
+    override val soupResourceLocation: ModelIdentifier?
         get() = null
     override val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
         get() = listOf()

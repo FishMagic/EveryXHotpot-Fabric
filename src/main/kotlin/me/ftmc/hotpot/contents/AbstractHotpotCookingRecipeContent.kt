@@ -33,10 +33,7 @@ abstract class AbstractHotpotCookingRecipeContent : AbstractHotpotItemStackConte
         hotpotBlockEntity: HotpotBlockEntity,
         pos: BlockPosWithLevel
     ): ItemStack? {
-        return getRecipe(itemStack, pos)?.craft(
-            SimpleInventory(itemStack),
-            pos.level.registryManager
-        )
+        return getRecipe(itemStack, pos)?.craft(SimpleInventory(itemStack))
 
     }
 

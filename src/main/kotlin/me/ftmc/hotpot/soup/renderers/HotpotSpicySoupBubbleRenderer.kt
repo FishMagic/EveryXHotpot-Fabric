@@ -4,8 +4,8 @@ import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.util.Identifier
 
 
 class HotpotSpicySoupBubbleRenderer : IHotpotSoupCustomElementRenderer {
@@ -13,13 +13,13 @@ class HotpotSpicySoupBubbleRenderer : IHotpotSoupCustomElementRenderer {
         0.21f,
         0.8f,
         35,
-        Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_bubble_large")
+        ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_bubble_large")
     )
     private val smallBubbleRenderer: HotpotBubbleRenderer = HotpotBubbleRenderer(
         0.35f,
         0.55f,
         45,
-        Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_bubble_small")
+        ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_bubble_small")
     )
 
     override fun render(

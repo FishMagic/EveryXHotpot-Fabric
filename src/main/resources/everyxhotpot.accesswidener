@@ -1,8 +1,9 @@
 accessWidener v2 named
 accessible method net/minecraft/client/render/model/json/ModelOverrideList <init> ()V
-accessible class net/minecraft/client/texture/SpriteContents$Animation
-accessible field net/minecraft/client/texture/SpriteContents animation Lnet/minecraft/client/texture/SpriteContents$Animation;
-mutable field net/minecraft/client/texture/SpriteContents animation Lnet/minecraft/client/texture/SpriteContents$Animation;
 accessible field net/minecraft/client/render/block/BlockModelRenderer DIRECTIONS [Lnet/minecraft/util/math/Direction;
 accessible method net/minecraft/client/render/block/BlockModelRenderer renderQuads (Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;FFFLjava/util/List;II)V
-accessible field net/minecraft/client/texture/SpriteContents image Lnet/minecraft/client/texture/NativeImage;
+accessible field net/minecraft/inventory/CraftingInventory stacks Lnet/minecraft/util/collection/DefaultedList;
+accessible field net/minecraft/client/texture/Sprite$Info animationData Lnet/minecraft/client/resource/metadata/AnimationResourceMetadata;
+accessible method net/minecraft/client/texture/Sprite <init> (Lnet/minecraft/client/texture/SpriteAtlasTexture;Lnet/minecraft/client/texture/Sprite$Info;IIIIILnet/minecraft/client/texture/NativeImage;)V
+accessible class net/minecraft/registry/Registries$Initializer
+accessible method net/minecraft/registry/Registries create (Lnet/minecraft/registry/RegistryKey;Ljava/lang/String;Lnet/minecraft/registry/Registries$Initializer;)Lnet/minecraft/registry/DefaultedRegistry;

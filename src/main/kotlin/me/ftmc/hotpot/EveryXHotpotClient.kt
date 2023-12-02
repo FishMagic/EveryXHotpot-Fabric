@@ -10,7 +10,7 @@ import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
-import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
@@ -34,8 +34,8 @@ object EveryXHotpotClient : ClientModInitializer {
         )
 //        BuiltinItemRendererRegistry.INSTANCE.register(EveryXHotpot.HOTPOT_LONG_PLATE_BLOCK_ITEM, HOTPOT_BEWLR)
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), EveryXHotpot.HOTPOT_BLOCK)
-        ModelLoadingPlugin.register {
-            it.addModels(
+        ModelLoadingRegistry.INSTANCE.registerModelProvider { _, out ->
+            listOf(
                 Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup_bubble"),
                 Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_clear_soup"),
                 Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_bubble_small"),
@@ -51,7 +51,7 @@ object EveryXHotpotClient : ClientModInitializer {
                 Identifier(EveryXHotpot.MOD_ID, "block/hotpot_plate_small"),
                 Identifier(EveryXHotpot.MOD_ID, "block/hotpot_chopstick_stand"),
                 Identifier(EveryXHotpot.MOD_ID, "item/hotpot_spice_pack_model")
-            )
+            ).forEach { out.accept(it) }
         }
         GetTooltipEventCallback.EVENT.register(object : GetTooltipEventCallback {
             override fun getTooltip(
@@ -70,7 +70,13 @@ object EveryXHotpotClient : ClientModInitializer {
                 }
 
                 if (HotpotEffectHelper.hasEffects(realItem)) {
-                    PotionUtil.buildTooltip(HotpotEffectHelper.getListEffects(realItem), list, 1f)
+                    val copied = realItem.copy()
+
+                    PotionUtil.setCustomPotionEffects(
+                        copied,
+                        HotpotEffectHelper.mergeEffects(HotpotEffectHelper.getListEffects(realItem))
+                    )
+                    PotionUtil.buildTooltip(copied, list, 1.0f)
                 }
 
                 return list

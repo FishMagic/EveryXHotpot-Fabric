@@ -15,29 +15,29 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
 
 
-class CheesedBakedModel(val originalModel: BakedModel, val cheeseModel: BakedModel?) : BakedModel {
+class CheesedBakedModel(val originalModel: BakedModel?, val cheeseModel: BakedModel?) : BakedModel {
     override fun getQuads(state: BlockState?, direction: Direction?, randomSource: Random): List<BakedQuad> {
-        return originalModel.getQuads(state, direction, randomSource)
+        return originalModel?.getQuads(state, direction, randomSource) ?: listOf()
     }
 
     override fun useAmbientOcclusion(): Boolean {
-        return originalModel.useAmbientOcclusion()
+        return originalModel?.useAmbientOcclusion() ?: false
     }
 
     override fun hasDepth(): Boolean {
-        return originalModel.hasDepth()
+        return originalModel?.hasDepth() ?: false
     }
 
     override fun isSideLit(): Boolean {
-        return originalModel.isSideLit
+        return originalModel?.isSideLit ?: false
     }
 
     override fun isBuiltin(): Boolean {
-        return originalModel.isBuiltin
+        return originalModel?.isBuiltin ?: false
     }
 
-    override fun getParticleSprite(): Sprite {
-        return originalModel.particleSprite
+    override fun getParticleSprite(): Sprite? {
+        return originalModel?.particleSprite
     }
 
     override fun getOverrides(): ModelOverrideList {
@@ -56,14 +56,14 @@ class CheesedBakedModel(val originalModel: BakedModel, val cheeseModel: BakedMod
                     clientLevel,
                     livingEntity,
                     seed
-                ) else originalModel.overrides
-                    .apply(originalModel, itemStack, clientLevel, livingEntity, seed)
+                ) else originalModel?.overrides
+                    ?.apply(originalModel, itemStack, clientLevel, livingEntity, seed)
             }
         }
     }
 
-    override fun getTransformation(): ModelTransformation {
-        return originalModel.transformation
+    override fun getTransformation(): ModelTransformation? {
+        return originalModel?.transformation
     }
 
 //    fun getRenderPasses(itemStack: ItemStack, fabulous: Boolean): List<BakedModel> {

@@ -7,6 +7,7 @@ import me.ftmc.hotpot.soup.effects.HotpotEffectHelper
 import me.ftmc.hotpot.soup.renderers.HotpotSpicySoupBubbleRenderer
 import me.ftmc.hotpot.soup.renderers.HotpotSpicySoupFloatingPepperRenderer
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
@@ -27,8 +28,8 @@ class HotpotSpicySoup : AbstractHotpotWaterBasedSoup() {
 
     override val bubbleResourceLocation: Identifier
         get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup_bubble_small")
-    override val soupResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup")
+    override val soupResourceLocation: ModelIdentifier?
+        get() = ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_spicy_soup")
     override val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
         get() = listOf(HOTPOT_BUBBLE_RENDERER, HOTPOT_SPICY_SOUP_FLOATING_PEPPER_RENDERER)
 

@@ -1,10 +1,11 @@
 package me.ftmc.hotpot.spices
 
-import net.minecraft.inventory.RecipeInputInventory
+import me.ftmc.hotpot.forge.net.minecraft.item.copyWithCount
+import net.minecraft.inventory.CraftingInventory
 import net.minecraft.item.ItemStack
 
 
-class HotpotSpiceAssembler(private val craftingContainer: RecipeInputInventory) {
+class HotpotSpiceAssembler(private val craftingContainer: CraftingInventory) {
     private var assembled: ItemStack = ItemStack.EMPTY
     private var filter: (ItemStack) -> Boolean = { true }
 

@@ -2,21 +2,20 @@ package me.ftmc.hotpot.spices
 
 import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.HotpotTagsHelper
-import net.minecraft.inventory.RecipeInputInventory
+import me.ftmc.hotpot.forge.net.minecraft.item.copyWithCount
+import net.minecraft.inventory.CraftingInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.SpecialCraftingRecipe
-import net.minecraft.recipe.book.CraftingRecipeCategory
-import net.minecraft.registry.DynamicRegistryManager
-import net.minecraft.registry.tag.ItemTags
+import net.minecraft.tag.ItemTags
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 
-class HotpotSpicePackRecipe(id: Identifier, category: CraftingRecipeCategory) : SpecialCraftingRecipe(id, category) {
-    override fun matches(craftingContainer: RecipeInputInventory, level: World): Boolean {
+class HotpotSpicePackRecipe(id: Identifier) : SpecialCraftingRecipe(id) {
+    override fun matches(craftingContainer: CraftingInventory, level: World): Boolean {
         val list: MutableList<ItemStack> = mutableListOf()
         return HotpotSpiceMatcher(craftingContainer)
             .with { it.isIn(ItemTags.SMALL_FLOWERS) }
@@ -31,7 +30,7 @@ class HotpotSpicePackRecipe(id: Identifier, category: CraftingRecipeCategory) : 
             .match()
     }
 
-    override fun craft(craftingContainer: RecipeInputInventory, registryAccess: DynamicRegistryManager): ItemStack {
+    override fun craft(craftingContainer: CraftingInventory): ItemStack {
         return HotpotSpiceAssembler(craftingContainer)
             .withExisting({ it.isOf(EveryXHotpot.HOTPOT_SPICE_PACK) }) { ItemStack(EveryXHotpot.HOTPOT_SPICE_PACK) } /*.filter(itemStack -> !HotpotSpicePackRecipe.PREDICATE.test(itemStack))*/
             .forEach { assembled, itemStack ->

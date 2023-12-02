@@ -3,10 +3,7 @@ package me.ftmc.hotpot.blocks
 import me.ftmc.hotpot.BlockPosWithLevel
 import me.ftmc.hotpot.EveryXHotpot
 import me.ftmc.hotpot.items.HotpotPlaceableBlockItem
-import net.minecraft.block.BlockState
-import net.minecraft.block.BlockWithEntity
-import net.minecraft.block.MapColor
-import net.minecraft.block.ShapeContext
+import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
@@ -23,8 +20,7 @@ import net.minecraft.world.World
 
 
 class HotpotPlaceableBlock : BlockWithEntity(
-    Settings.create()
-        .solid()
+    Settings.of(Material.METAL)
         .nonOpaque()
         .mapColor(MapColor.GRAY)
         .sounds(BlockSoundGroup.COPPER)

@@ -8,9 +8,9 @@ import me.ftmc.hotpot.contents.IHotpotContent
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.item.Item
 import net.minecraft.item.Items
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
 
@@ -18,10 +18,10 @@ import kotlin.reflect.KClass
 object HotpotSoups {
     val SINOFEAST_LOADED: Boolean =
         FabricLoader.getInstance().allMods.any { it.metadata.id == "getModContainerIterator" }
-    val SPICY_ITEM_TAG: TagKey<Item>? = TagKey.of(RegistryKeys.ITEM, Identifier("sinofeast", "tastes/primary/spicy"))
-    val ACRID_ITEM_TAG: TagKey<Item>? = TagKey.of(RegistryKeys.ITEM, Identifier("sinofeast", "tastes/primary/acrid"))
-    val MILK_ITEM_TAG: TagKey<Item>? = TagKey.of(RegistryKeys.ITEM, Identifier("forge", "milk/milk"))
-    val MILK_BOTTLE_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM, Identifier("forge", "milk/milk_bottle"))
+    val SPICY_ITEM_TAG: TagKey<Item>? = TagKey.of(Registry.ITEM_KEY, Identifier("sinofeast", "tastes/primary/spicy"))
+    val ACRID_ITEM_TAG: TagKey<Item>? = TagKey.of(Registry.ITEM_KEY, Identifier("sinofeast", "tastes/primary/acrid"))
+    val MILK_ITEM_TAG: TagKey<Item>? = TagKey.of(Registry.ITEM_KEY, Identifier("forge", "milk/milk"))
+    val MILK_BOTTLE_ITEM_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY, Identifier("forge", "milk/milk_bottle"))
     val HOTPOT_SOUP_TYPES: ConcurrentHashMap<String, () -> IHotpotSoup> =
         ConcurrentHashMap(
             mapOf(

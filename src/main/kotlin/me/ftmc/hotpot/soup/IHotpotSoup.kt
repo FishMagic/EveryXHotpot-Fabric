@@ -6,6 +6,7 @@ import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.contents.IHotpotContent
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
 import me.ftmc.hotpot.soup.synchronizers.IHotpotSoupSynchronizer
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -61,7 +62,7 @@ interface IHotpotSoup : IHotpotSavable<IHotpotSoup> {
     fun entityInside(hotpotBlockEntity: HotpotBlockEntity, pos: BlockPosWithLevel, entity: Entity)
     fun tick(hotpotBlockEntity: HotpotBlockEntity, pos: BlockPosWithLevel)
     val bubbleResourceLocation: Identifier?
-    val soupResourceLocation: Identifier?
+    val soupResourceLocation: ModelIdentifier?
     val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
 
     companion object {

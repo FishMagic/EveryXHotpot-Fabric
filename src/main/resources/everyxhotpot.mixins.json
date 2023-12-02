@@ -15,7 +15,6 @@
     "BreakingItemParticleMixin",
     "ItemRenderMixin",
     "ModelBakeryMixin",
-    "SpriteContentsMixin",
-    "SpriteLoaderMixin"
+    "TextureAtlasMixin"
   ]
 }

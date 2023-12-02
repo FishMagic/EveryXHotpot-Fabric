@@ -6,7 +6,7 @@ import me.ftmc.hotpot.items.IHotpotSpecialContentItem
 import me.ftmc.hotpot.soup.IHotpotSoupWithActiveness
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.model.json.ModelTransformationMode
+import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.ExperienceOrbEntity
 import net.minecraft.item.FoodComponent
@@ -14,8 +14,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.math.RotationAxis
-import org.joml.Math
+import net.minecraft.util.math.Vec3f
 
 
 abstract class AbstractHotpotItemStackContent : IHotpotContent {
@@ -73,20 +72,20 @@ abstract class AbstractHotpotItemStackContent : IHotpotContent {
             (ITEM_START_Y + getFloatingCurve(f, 0f) * ITEM_FLOAT_Y + 0.42f * waterline).toDouble(),
             0.5f + Math.cos(f * 2f * Math.PI) * ITEM_RADIUS
         )
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(f * 360f))
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90f + getFloatingCurve(f, 1f) * ITEM_ROTATION))
+        poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(f * 360f))
+        poseStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90f + getFloatingCurve(f, 1f) * ITEM_ROTATION))
         poseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
         context.itemRenderer.renderItem(
             null,
             itemStack,
-            ModelTransformationMode.FIXED,
+            ModelTransformation.Mode.FIXED,
             true,
             poseStack,
             bufferSource,
             hotpotBlockEntity.world,
             combinedLight,
             combinedOverlay,
-            ModelTransformationMode.FIXED.ordinal
+            ModelTransformation.Mode.FIXED.ordinal
         )
         poseStack.pop()
     }

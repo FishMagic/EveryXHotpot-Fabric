@@ -46,7 +46,7 @@ abstract class AbstractHotpotSoup : IHotpotSoup {
                 hotpotBlockEntity.setSoup(HotpotSoups.emptySoup(), selfPos)
                 hotpotBlockEntity.onRemove(selfPos)
             } else {
-                player.damage(player.damageSources.onFire(), 5F)
+                player.damage(DamageSource.ON_FIRE, 5F)
                 hotpotBlockEntity.tryTakeOutContentViaHand(hitSection, selfPos)
             }
             return null
@@ -108,7 +108,7 @@ abstract class AbstractHotpotSoup : IHotpotSoup {
             return
         }
         if (entity.isAttackable) {
-            entity.damage(DamageSource(EveryXHotpot.IN_HOTPOT_DAMAGE_TYPE(pos.level), pos.toVec3()), 3f)
+            entity.damage(EveryXHotpot.HOTPOT_DAMAGE_SOURCE, 3f)
         }
     }
 

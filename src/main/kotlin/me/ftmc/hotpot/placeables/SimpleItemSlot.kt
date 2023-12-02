@@ -1,9 +1,10 @@
 package me.ftmc.hotpot.placeables
 
 import me.ftmc.hotpot.BlockPosWithLevel
+import me.ftmc.hotpot.forge.net.minecraft.item.copyWithCount
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.model.json.ModelTransformationMode
+import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
@@ -22,13 +23,12 @@ class SimpleItemSlot {
     ) {
         context.itemRenderer.renderItem(
             itemSlot,
-            ModelTransformationMode.FIXED,
+            ModelTransformation.Mode.FIXED,
             combinedLight,
             combinedOverlay,
             poseStack,
             bufferSource,
-            null,
-            ModelTransformationMode.GROUND.ordinal
+            ModelTransformation.Mode.GROUND.ordinal
         )
     }
 
@@ -37,7 +37,8 @@ class SimpleItemSlot {
 
     fun addItem(itemStack: ItemStack): Boolean {
         if (itemSlot.isEmpty) {
-            itemSlot = itemStack.copyAndEmpty()
+            itemSlot = itemStack.copy()
+            itemStack.count = 0
             return true
         } else if (ItemStack.canCombine(itemStack, itemSlot)) {
             moveItemWithCount(itemStack)
@@ -62,7 +63,9 @@ class SimpleItemSlot {
         get() = itemSlot.isEmpty
 
     fun dropItem(pos: BlockPosWithLevel) {
-        pos.dropItemStack(itemSlot.copyAndEmpty())
+        val copied = itemSlot.copy()
+        itemSlot.count = 0
+        pos.dropItemStack(copied)
     }
 
     fun save(compoundTag: NbtCompound): NbtCompound {

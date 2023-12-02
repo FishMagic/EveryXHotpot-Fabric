@@ -1,13 +1,13 @@
 package me.ftmc.hotpot.spices
 
-import net.minecraft.inventory.RecipeInputInventory
+import net.minecraft.inventory.CraftingInventory
 import net.minecraft.item.ItemStack
 
 
 class HotpotSpiceMatcher(val items: MutableList<ItemStack>) {
     private var matched = true
 
-    constructor(craftingContainer: RecipeInputInventory) : this(craftingContainer.inputStacks.toMutableList())
+    constructor(craftingContainer: CraftingInventory) : this(craftingContainer.stacks.toMutableList())
 
     fun collect(predicate: (ItemStack) -> Boolean, consumer: (ItemStack) -> Unit): HotpotSpiceMatcher {
         items.filter(predicate).forEach(consumer)

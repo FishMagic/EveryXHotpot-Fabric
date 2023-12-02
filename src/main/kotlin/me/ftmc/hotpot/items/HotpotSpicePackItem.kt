@@ -6,9 +6,10 @@ import me.ftmc.hotpot.HotpotTagsHelper
 import me.ftmc.hotpot.blocks.HotpotBlockEntity
 import me.ftmc.hotpot.contents.IHotpotContent
 import me.ftmc.hotpot.soup.effects.HotpotEffectHelper
-import net.minecraft.block.SuspiciousStewIngredient
+import net.minecraft.block.FlowerBlock
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
@@ -19,7 +20,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
 
-class HotpotSpicePackItem : Item(Settings()), IHotpotSpecialContentItem {
+class HotpotSpicePackItem : Item(Settings().group(EveryXHotpot.EVERY_X_HOTPOT_TAB)), IHotpotSpecialContentItem {
 //    fun initializeClient(consumer: Consumer<IClientItemExtensions?>) {
 //        consumer.accept(object : IClientItemExtensions() {
 //            val customRenderer: BlockEntityWithoutLevelRenderer
@@ -70,7 +71,11 @@ class HotpotSpicePackItem : Item(Settings()), IHotpotSpecialContentItem {
                 Text.translatable("item.everyxhotpot.hotpot_spice_pack.amount", getSpiceAmount(itemStack))
                     .formatted(Formatting.BLUE)
             )
-            PotionUtil.buildTooltip(HotpotEffectHelper.mergeEffects(getSpiceEffects(itemStack)), tooltips, 1.0f)
+
+            val copied = itemStack.copy()
+            PotionUtil.setCustomPotionEffects(copied, HotpotEffectHelper.mergeEffects(getSpiceEffects(itemStack)))
+
+            PotionUtil.buildTooltip(copied, tooltips, 1.0f)
         }
     }
 
@@ -92,7 +97,7 @@ class HotpotSpicePackItem : Item(Settings()), IHotpotSpecialContentItem {
         return HotpotTagsHelper.getHotpotTag(itemStack).getList("Spices", NbtElement.COMPOUND_TYPE.toInt())
             .asSequence()
             .map { ItemStack.fromNbt(it as NbtCompound) }
-            .map { SuspiciousStewIngredient.of(it.item) }
+            .map { ((it.item as BlockItem).block as? FlowerBlock) }
             .filterNotNull()
             .map { StatusEffectInstance(it.effectInStew, it.effectInStewDuration * 2, 1) }
             .toList()

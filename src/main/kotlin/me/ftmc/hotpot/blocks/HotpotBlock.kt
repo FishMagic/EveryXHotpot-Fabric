@@ -9,11 +9,10 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Equipment
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Wearable
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
@@ -30,16 +29,14 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
 class HotpotBlock : BlockWithEntity(
-    Settings.create()
-        .solid()
+    Settings.of(Material.METAL)
         .nonOpaque()
         .mapColor(MapColor.IRON_GRAY)
         .sounds(BlockSoundGroup.COPPER)
         .requiresTool()
         .luminance { 15 }
         .strength(3f, 6f)
-        .solidBlock(Blocks::never)
-), Equipment {
+), Wearable {
     private val shapesByIndex: Array<VoxelShape> = makeShapes()
     private val stateToIndex: Object2IntMap<BlockState> = Object2IntOpenHashMap()
 
@@ -280,9 +277,5 @@ class HotpotBlock : BlockWithEntity(
     @Deprecated("Deprecated in Java")
     override fun getRenderType(state: BlockState): BlockRenderType {
         return BlockRenderType.MODEL
-    }
-
-    override fun getSlotType(): EquipmentSlot {
-        return EquipmentSlot.HEAD
     }
 }

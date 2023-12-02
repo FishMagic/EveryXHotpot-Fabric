@@ -7,8 +7,8 @@ import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.model.BakedModel
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.random.Random
 
 
@@ -16,7 +16,7 @@ class HotpotBubbleRenderer(
     private val spread: Float,
     private val maxScale: Float,
     amount: Int,
-    private val bubbleLocation: Identifier
+    private val bubbleLocation: ModelIdentifier
 ) :
     IHotpotSoupCustomElementRenderer {
     private val bubbles: Array<Bubble?> = arrayOfNulls(amount)
@@ -34,8 +34,8 @@ class HotpotBubbleRenderer(
         poseStack.push()
         val progress: Float = (blockEntity.time + bubble.offset) % BUBBLE_GROWTH_TIME / BUBBLE_GROWTH_TIME
         val scale = progress * maxScale
-        val y: Float = BUBBLE_START_Y + blockEntity.renderedWaterLevel * progress * BUBBLE_GROWTH_Y
-        poseStack.translate(bubble.x, y, bubble.z)
+        val y = BUBBLE_START_Y + blockEntity.renderedWaterLevel * progress * BUBBLE_GROWTH_Y
+        poseStack.translate(bubble.x, y.toDouble(), bubble.z)
         poseStack.scale(scale, scale, scale)
         context.renderManager.modelRenderer.renderModel(
             poseStack.peek(),
@@ -69,8 +69,8 @@ class HotpotBubbleRenderer(
             val bubble = bubbles[i]
             if (bubble == null || blockEntity.time >= bubble.startTime + bubble.offset + BUBBLE_GROWTH_TIME) {
                 bubbles[i] = Bubble(
-                    0.5f + (RANDOM_SOURCE.nextFloat() * 2f - 1f) * spread,
-                    0.5f + (RANDOM_SOURCE.nextFloat() * 2f - 1f) * spread,
+                    0.5 + (RANDOM_SOURCE.nextFloat() * 2f - 1f) * spread,
+                    0.5 + (RANDOM_SOURCE.nextFloat() * 2f - 1f) * spread,
                     RANDOM_SOURCE.nextBetween(-BUBBLE_EMERGE_OFFSET_RANGE, BUBBLE_EMERGE_OFFSET_RANGE + 1),
                     blockEntity.time
                 )
@@ -81,7 +81,7 @@ class HotpotBubbleRenderer(
     }
 
     @JvmRecord
-    data class Bubble(val x: Float, val z: Float, val offset: Int, val startTime: Int)
+    data class Bubble(val x: Double, val z: Double, val offset: Int, val startTime: Int)
     companion object {
         val RANDOM_SOURCE: Random = Random.createLocal()
         const val BUBBLE_EMERGE_OFFSET_RANGE = 5

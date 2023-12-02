@@ -8,6 +8,7 @@ import me.ftmc.hotpot.contents.IHotpotContent
 import me.ftmc.hotpot.soup.effects.HotpotEffectHelper
 import me.ftmc.hotpot.soup.renderers.HotpotBubbleRenderer
 import me.ftmc.hotpot.soup.renderers.IHotpotSoupCustomElementRenderer
+import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
@@ -65,8 +66,8 @@ class HotpotCheeseSoup : AbstractEffectiveFluidBasedSoup(
 
     override val bubbleResourceLocation: Identifier
         get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_cheese_soup_bubble")
-    override val soupResourceLocation: Identifier
-        get() = Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_cheese_soup")
+    override val soupResourceLocation: ModelIdentifier?
+        get() = ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_cheese_soup")
     override val customElementRenderers: List<IHotpotSoupCustomElementRenderer>
         get() = listOf(HOTPOT_BUBBLE_RENDERER)
     override val waterLevelDropRate: Float
@@ -77,7 +78,7 @@ class HotpotCheeseSoup : AbstractEffectiveFluidBasedSoup(
             0.35f,
             0.8f,
             55,
-            Identifier(EveryXHotpot.MOD_ID, "soup/hotpot_cheese_soup_bubble")
+            ModelIdentifier(EveryXHotpot.MOD_ID, "soup/hotpot_cheese_soup_bubble")
         )
     }
 }
